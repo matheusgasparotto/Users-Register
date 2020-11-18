@@ -19,16 +19,33 @@ const App = () => {
 
   const schema = yup.object().shape({});
 
+  const history = useHistory();
+
+  const handleLogin = () => {
+    history.push("/login");
+  };
+
+  const handleSignUp = () => {
+    history.push("/signup");
+  };
+
   return (
     <div className="App">
       <AppBar position="static">
         <Toolbar>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Sign-up</Button>
+          <Button color="inherit" onClick={handleLogin}>
+            Login
+          </Button>
+          <Button color="inherit" onClick={handleSignUp}>
+            Sign-up
+          </Button>
         </Toolbar>
       </AppBar>
       <Switch>
-        <Route></Route>
+        <Route exact path="/:local">
+          <Login />
+          <SignUp />
+        </Route>
       </Switch>
     </div>
   );
