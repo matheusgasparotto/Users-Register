@@ -13,7 +13,6 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 
 const App = () => {
   const { register, unregister, handleSubmit, setValue, errors } = useForm();
