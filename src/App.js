@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Switch, Link, useHistory, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Input,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
-function App() {
+const App = () => {
+  const { register, unregister, handleSubmit, setValue, errors } = useForm();
+
+  const schema = yup.object().shape({});
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit">Login</Button>
+          <Button color="inherit">Sign-up</Button>
+        </Toolbar>
+      </AppBar>
+      <Switch>
+        <Route></Route>
+      </Switch>
     </div>
   );
-}
+};
 
 export default App;
