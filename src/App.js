@@ -1,18 +1,13 @@
 import "./App.css";
-import { Route, Switch, Link, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, AppBar, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Button } from "@material-ui/core";
 import SignUp from "./Pages/UserForm";
 import Login from "./Pages/Login";
 
 const App = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const schema = yup.object().shape({});
 
   const history = useHistory();
 
@@ -43,10 +38,10 @@ const App = () => {
         </AppBar>
       </div>
       <Switch>
-        <Route exact path="/:local">
-          <Login />
-          <SignUp />
-        </Route>
+        <Login />
+      </Switch>
+      <Switch>
+        <SignUp />
       </Switch>
     </div>
   );

@@ -1,17 +1,12 @@
-import {
-  FormControl,
-  Button,
-  Input,
-  Paper,
-  InputLabel,
-  Link,
-} from "@material-ui/core";
+import { Button, Input, Paper, InputLabel, Link } from "@material-ui/core";
 import { Route } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
+import { useState, useEffect } from "react";
+import registerRequest from "../../Request/registerRequest";
 
 const Login = () => {
   const schema = yup.object().shape({
@@ -39,19 +34,27 @@ const Login = () => {
     },
   });
 
-  const { register, unregister, handleSubmit, setValue, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   const handleLogin = (data) => {
     console.log(data);
+    const request = { data: data, path: "authenticate" };
+    registerRequest(request);
   };
 
+  const [loginClass, setLoginClass] = useState("cardLogin-off ");
+
+  useEffect(() => {
+    setLoginClass("cardLogin-on ");
+  }, []);
+
   return (
-    <div>
-      <Route exact path="/login">
+    <Route exact path="/login">
+      <div className={loginClass}>
         <ThemeProvider theme={theme}>
-          <Paper className="cardLogin" elevation={3}>
+          <Paper elevation={3} square={true} className="cardLogin">
             <form onSubmit={handleSubmit(handleLogin)}>
               <InputLabel className="inputsLabel" htmlFor="user">
                 Usuário
@@ -89,8 +92,8 @@ const Login = () => {
             </form>
           </Paper>
         </ThemeProvider>
-      </Route>
-    </div>
+      </div>
+    </Route>
   );
 };
 
