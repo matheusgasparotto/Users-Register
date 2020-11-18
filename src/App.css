@@ -28,6 +28,24 @@
   color: #61dafb;
 }
 
+.menu {
+  width: 1%;
+  overflow: hidden;
+}
+.MuiPaper-root {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.menu-open {
+  transition: 2s;
+  width: 100%;
+}
+
+.MuiToolbar-root {
+  background-color: #282c34;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
