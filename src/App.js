@@ -7,9 +7,7 @@ import * as yup from "yup";
 const App = () => {
   return (
     <div className="App">
-      <Switch>
-        <Home />
-      </Switch>
+      <Home />
     </div>
   );
 };
