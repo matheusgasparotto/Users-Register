@@ -6,10 +6,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import { useState, useEffect } from "react";
-import registerRequest from "../../Request/registerRequest";
+import Request from "../../Request/Request";
 import { LoginData } from "../../data/LoginData";
 
-const Login = () => {
+const Login = ({ setAutorized, authorized }) => {
   const schema = yup.object().shape({
     user: yup
       .string("Formato de usuário inválido.")
@@ -35,14 +35,24 @@ const Login = () => {
     },
   });
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setValue } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const [errorsServer, setErrorsServer] = useState();
+
+  const handleLogin = async (data) => {
     const request = { data: data, path: "authenticate" };
-    registerRequest(request);
+    let result;
+    try {
+      result = await Request(request);
+      const { status } = result;
+      status === 200 && setAutorized(true);
+    } catch (error) {
+      setErrorsServer({ message: "Usuário ou senha invalidos" });
+    }
+
+    console.log(result);
   };
 
   const [loginClass, setLoginClass] = useState("cardLogin-off ");
@@ -76,7 +86,9 @@ const Login = () => {
               );
             })}
             <p className="errors">
-              {errors.user?.message || errors.password?.message}
+              {errors.user?.message ||
+                errors.password?.message ||
+                errorsServer?.message}
             </p>
             <div className="buttons">
               <Button

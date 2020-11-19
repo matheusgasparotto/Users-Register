@@ -1,11 +1,11 @@
 import "./index.css";
 import { useForm } from "react-hook-form";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Button, InputLabel, Paper } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import registerRequest from "../../Request/registerRequest";
+import Request from "../../Request/Request";
 import { FormData } from "../../data/FormData";
 
 const UserForm = () => {
@@ -54,9 +54,14 @@ const UserForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleForm = (data) => {
+  const history = useHistory();
+
+  const handleForm = async (data) => {
     const request = { data: { user: data }, path: "users" };
-    registerRequest(request);
+    const result = await Request(request);
+    const { status } = result;
+    console.log(result);
+    status === 201 && history.push("/login");
   };
 
   return (
