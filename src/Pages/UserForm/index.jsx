@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Button, InputLabel, Paper } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import registerRequest from "../../Request/registerRequest";
+import { FormData } from "../../data/FormData";
 
 const UserForm = () => {
   const theme = createMuiTheme({
@@ -28,23 +29,25 @@ const UserForm = () => {
       .string("Formato de nome inválido.")
       .matches(
         /\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/gi,
-        "Seu nome deve conter apenas letras."
+        "Informar nome e sobrenome contendo apenas letras."
       )
       .required("Campo obrigatório."),
     email: yup
       .string("Formato de e-mail inválido.")
       .email("Formato de e-mail inválido.")
-      .required("Campo obrigotóri."),
+      .required("Campo obrigatório."),
     password: yup
       .string("Formato de senha inválida.")
       .min(6, "Sua senha deve ter no mínimo 6 caractéres.")
       .matches(
         /(?=.*[#$@!%&*?])/i,
         "Sua senha deve ter no mínimo um caractér especial."
-      ),
+      )
+      .required("Campo obrigatório."),
     password_confirmation: yup
       .string("Formato de senha inválida.")
-      .oneOf([yup.ref("password")], "Senhas não correspondem."),
+      .oneOf([yup.ref("password")], "Suas senhas não correspondem.")
+      .required("Campo obrigatório."),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -57,67 +60,48 @@ const UserForm = () => {
   };
 
   return (
-    <Route exact path="/signup">
-      <div>
-        <ThemeProvider theme={theme}>
-          <Paper elevation={3} square={true} className="cardSignUp">
-            <form onSubmit={handleSubmit(handleForm)} className="form">
-              <InputLabel className="inputsLabel" htmlFor="user">
-                Usuário
-              </InputLabel>
-              <Input name="user" inputRef={register} error={!!errors.user} />
-              <InputLabel className="inputsLabel" htmlFor="name">
-                Nome Completo
-              </InputLabel>
-              <Input name="name" inputRef={register} error={!!errors.name} />
-              <InputLabel className="inputsLabel" htmlFor="email">
-                E-mail
-              </InputLabel>
-              <Input name="email" inputRef={register} error={!!errors.email} />
-              <InputLabel className="inputsLabel" htmlFor="password">
-                Senha
-              </InputLabel>
-              <Input
-                name="password"
-                inputRef={register}
-                error={!!errors.password}
-                type="password"
-              />
-              <InputLabel
-                className="inputsLabel"
-                htmlFor="password_confirmation"
+    <div>
+      <ThemeProvider theme={theme}>
+        <Paper elevation={3} square={true} className="cardSignUp">
+          <form onSubmit={handleSubmit(handleForm)} className="form">
+            {FormData.map((input, index) => {
+              const { name, label, type } = input;
+              return (
+                <div key={index}>
+                  <InputLabel className="inputsLabel" htmlFor={name}>
+                    {label}
+                  </InputLabel>
+                  <Input
+                    name={name}
+                    inputRef={register}
+                    error={!!errors.name}
+                    type={type}
+                    id={name}
+                  />
+                </div>
+              );
+            })}
+            <p className="errors">
+              {errors.user?.message ||
+                errors.name?.message ||
+                errors.email?.message ||
+                errors.password?.message ||
+                errors.password_confirmation?.message}
+            </p>
+            <div>
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                className="requestButton"
               >
-                Confirmar senha
-              </InputLabel>
-              <Input
-                name="password_confirmation"
-                inputRef={register}
-                error={!!errors.password_confirmation}
-                type="password"
-              />
-              <br></br>
-              <p className="errors">
-                {errors.user?.message ||
-                  errors.name?.message ||
-                  errors.email?.message ||
-                  errors.password?.message ||
-                  errors.password_confirmation?.message}
-              </p>
-              <div>
-                <Button
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  className="requestButton"
-                >
-                  Enviar
-                </Button>
-              </div>
-            </form>
-          </Paper>
-        </ThemeProvider>
-      </div>
-    </Route>
+                Enviar
+              </Button>
+            </div>
+          </form>
+        </Paper>
+      </ThemeProvider>
+    </div>
   );
 };
 

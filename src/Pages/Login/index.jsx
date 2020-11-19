@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import { useState, useEffect } from "react";
 import registerRequest from "../../Request/registerRequest";
+import { LoginData } from "../../data/LoginData";
 
 const Login = () => {
   const schema = yup.object().shape({
@@ -51,49 +52,47 @@ const Login = () => {
   }, []);
 
   return (
-    <Route exact path="/login">
-      <div className={loginClass}>
-        <ThemeProvider theme={theme}>
-          <Paper elevation={3} square={true} className="cardLogin">
-            <form onSubmit={handleSubmit(handleLogin)}>
-              <InputLabel className="inputsLabel" htmlFor="user">
-                Usuário
-              </InputLabel>
-              <Input
-                className="inputs"
-                id="user"
-                name="user"
-                label="Usuário"
-                inputRef={register}
-              />
-              <InputLabel className="inputsLabel" htmlFor="password">
-                Senha
-              </InputLabel>
-              <Input
-                className="inputs"
-                id="password"
-                name="password"
-                label="Senha"
-                inputRef={register}
-              />
-              <div className="buttons">
-                <Button
-                  color="primary"
-                  variant="contained"
-                  className="sendButton"
-                  type="submit"
-                >
-                  entrar
-                </Button>
-                <Link className="forgotPass" href="#">
-                  Esqueceu a senha?
-                </Link>
-              </div>
-            </form>
-          </Paper>
-        </ThemeProvider>
-      </div>
-    </Route>
+    <div className={loginClass}>
+      <ThemeProvider theme={theme}>
+        <Paper elevation={3} square={true} className="cardLogin">
+          <form onSubmit={handleSubmit(handleLogin)}>
+            {LoginData.map((input, index) => {
+              const { name, type, label } = input;
+
+              return (
+                <div>
+                  <InputLabel className="inputsLabel" htmlFor={name}>
+                    {label}
+                  </InputLabel>
+                  <Input
+                    className="inputs"
+                    id={name}
+                    name={name}
+                    label={label}
+                    inputRef={register}
+                    type={type}
+                  />
+                </div>
+              );
+            })}
+
+            <div className="buttons">
+              <Button
+                color="primary"
+                variant="contained"
+                className="sendButton"
+                type="submit"
+              >
+                entrar
+              </Button>
+              <Link className="forgotPass" href="#">
+                Esqueceu a senha?
+              </Link>
+            </div>
+          </form>
+        </Paper>
+      </ThemeProvider>
+    </div>
   );
 };
 
