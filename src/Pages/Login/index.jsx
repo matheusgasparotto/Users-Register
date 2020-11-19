@@ -75,7 +75,9 @@ const Login = () => {
                 </div>
               );
             })}
-
+            <p className="errors">
+              {errors.user?.message || errors.password?.message}
+            </p>
             <div className="buttons">
               <Button
                 color="primary"
