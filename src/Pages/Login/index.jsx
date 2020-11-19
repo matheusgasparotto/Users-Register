@@ -39,11 +39,20 @@ const Login = ({ setAutorized, authorized }) => {
     resolver: yupResolver(schema),
   });
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const [errorsServer, setErrorsServer] = useState();
+
+  const handleLogin = async (data) => {
     const request = { data: data, path: "authenticate" };
-    const result = Request(request);
-    const { status } = result;
+    let result;
+    try {
+      result = await Request(request);
+      const { status } = result;
+      status === 200 && setAutorized(true);
+    } catch (error) {
+      setErrorsServer({ message: "Usuário ou senha invalidos" });
+    }
+
+    console.log(result);
   };
 
   const [loginClass, setLoginClass] = useState("cardLogin-off ");
@@ -77,7 +86,9 @@ const Login = ({ setAutorized, authorized }) => {
               );
             })}
             <p className="errors">
-              {errors.user?.message || errors.password?.message || errors.Not}
+              {errors.user?.message ||
+                errors.password?.message ||
+                errorsServer?.message}
             </p>
             <div className="buttons">
               <Button
