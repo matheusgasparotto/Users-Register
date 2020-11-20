@@ -11,6 +11,7 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import Request from "../../Request/Request";
 import { LoginData } from "../../data/LoginData";
+import { useHistory } from "react-router-dom";
 
 const Login = ({ setAuthenticated }) => {
   const schema = yup.object().shape({
@@ -45,14 +46,17 @@ const Login = ({ setAuthenticated }) => {
   const [loading, setLoading] = useState(false);
   const [errorsServer, setErrorsServer] = useState();
 
+  const history = useHistory();
+
   const Authenticate = (auth_token) => {
-    setAuthenticated(true);
-    window.localStorage.setItem("authToken", auth_token);
+    window.localStorage.setItem("auth_token", auth_token);
+    setAuthenticated(window.localStorage.getItem("auth_token"));
     setLoading(false);
+    history.push("/authenticated");
   };
 
   const handleLogin = async (data) => {
-    setLoading(!loading);
+    setLoading(true);
     const request = { data: data, path: "authenticate" };
     let result;
     try {
@@ -61,7 +65,7 @@ const Login = ({ setAuthenticated }) => {
       const { auth_token } = result.data;
       status === 200 && Authenticate(auth_token);
     } catch (error) {
-      setLoading(!loading);
+      setLoading(false);
       setErrorsServer({ message: "Usuário ou senha invalidos" });
     }
 
