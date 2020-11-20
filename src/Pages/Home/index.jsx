@@ -34,14 +34,12 @@ const Home = ({ setAuthenticated }) => {
           </Toolbar>
         </AppBar>
       </div>
-      <Switch>
-        <Route exact path="/login">
-          <Login setAuthenticated={setAuthenticated} />
-        </Route>
-        <Route exact path="/signup">
-          <SignUp />
-        </Route>
-      </Switch>
+      <Route exact path="/login">
+        <Login setAuthenticated={setAuthenticated} />
+      </Route>
+      <Route exact path="/signup">
+        <SignUp />
+      </Route>
     </>
   );
 };
