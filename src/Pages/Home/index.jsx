@@ -4,8 +4,7 @@ import Login from "../Login";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Home = () => {
-  const [autorized, setAutorized] = useState(false);
+const Home = ({ setAuthenticated }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const history = useHistory();
@@ -37,7 +36,7 @@ const Home = () => {
       </div>
       <Switch>
         <Route exact path="/login">
-          <Login authorized={autorized} setAutorized={setAutorized} />
+          <Login setAuthenticated={setAuthenticated} />
         </Route>
         <Route exact path="/signup">
           <SignUp />

@@ -1,6 +1,9 @@
 import { Button, Input, Paper, InputLabel, Link } from "@material-ui/core";
-import { Route } from "react-router-dom";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  CircularProgress,
+} from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,7 +12,7 @@ import { useState, useEffect } from "react";
 import Request from "../../Request/Request";
 import { LoginData } from "../../data/LoginData";
 
-const Login = ({ setAutorized, authorized }) => {
+const Login = ({ setAuthenticated }) => {
   const schema = yup.object().shape({
     user: yup
       .string("Formato de usuário inválido.")
@@ -35,20 +38,30 @@ const Login = ({ setAutorized, authorized }) => {
     },
   });
 
-  const { register, handleSubmit, errors, setValue } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const [loading, setLoading] = useState(false);
   const [errorsServer, setErrorsServer] = useState();
 
+  const Authenticate = (auth_token) => {
+    setAuthenticated(true);
+    window.localStorage.setItem("authToken", auth_token);
+    setLoading(false);
+  };
+
   const handleLogin = async (data) => {
+    setLoading(!loading);
     const request = { data: data, path: "authenticate" };
     let result;
     try {
       result = await Request(request);
       const { status } = result;
-      status === 200 && setAutorized(true);
+      const { auth_token } = result.data;
+      status === 200 && Authenticate(auth_token);
     } catch (error) {
+      setLoading(!loading);
       setErrorsServer({ message: "Usuário ou senha invalidos" });
     }
 
@@ -64,47 +77,51 @@ const Login = ({ setAutorized, authorized }) => {
   return (
     <div className={loginClass}>
       <ThemeProvider theme={theme}>
-        <Paper elevation={3} square={true} className="cardLogin">
-          <form onSubmit={handleSubmit(handleLogin)}>
-            {LoginData.map((input, index) => {
-              const { name, type, label } = input;
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Paper elevation={3} square={true} className="cardLogin">
+            <form onSubmit={handleSubmit(handleLogin)}>
+              {LoginData.map((input, index) => {
+                const { name, type, label } = input;
 
-              return (
-                <div>
-                  <InputLabel className="inputsLabel" htmlFor={name}>
-                    {label}
-                  </InputLabel>
-                  <Input
-                    className="inputs"
-                    id={name}
-                    name={name}
-                    label={label}
-                    inputRef={register}
-                    type={type}
-                  />
-                </div>
-              );
-            })}
-            <p className="errors">
-              {errors.user?.message ||
-                errors.password?.message ||
-                errorsServer?.message}
-            </p>
-            <div className="buttons">
-              <Button
-                color="primary"
-                variant="contained"
-                className="sendButton"
-                type="submit"
-              >
-                entrar
-              </Button>
-              <Link className="forgotPass" href="#">
-                Esqueceu a senha?
-              </Link>
-            </div>
-          </form>
-        </Paper>
+                return (
+                  <div key={index}>
+                    <InputLabel className="inputsLabel" htmlFor={name}>
+                      {label}
+                    </InputLabel>
+                    <Input
+                      className="inputs"
+                      id={name}
+                      name={name}
+                      label={label}
+                      inputRef={register}
+                      type={type}
+                    />
+                  </div>
+                );
+              })}
+              <p className="errors">
+                {errors.user?.message ||
+                  errors.password?.message ||
+                  errorsServer?.message}
+              </p>
+              <div className="buttons">
+                <Button
+                  color="primary"
+                  variant="contained"
+                  className="sendButton"
+                  type="submit"
+                >
+                  entrar
+                </Button>
+                <Link className="forgotPass" href="#">
+                  Esqueceu a senha?
+                </Link>
+              </div>
+            </form>
+          </Paper>
+        )}
       </ThemeProvider>
     </div>
   );
