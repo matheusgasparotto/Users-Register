@@ -5,6 +5,7 @@ import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
 import MenuAuthenticated from "../components/MenuAuthenticated";
 import UsersList from "../Pages/UsersList";
+import FormFeedbacks from "../Pages/FormFeedback";
 
 const Routers = () => {
   const history = useHistory();
@@ -27,7 +28,9 @@ const Routers = () => {
               <UsersList list={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />
             </Route>
             <Route exact path="/feedbacks"></Route>
-            <Route exact path="/feedback-form"></Route>
+            <Route exact path="/feedback-form">
+              <FormFeedbacks />
+            </Route>
             <Route exact path="/contact"></Route>
           </>
         ) : (

@@ -1,11 +1,11 @@
-import { Input, InputLabel } from "@material-ui/core";
+import { Input, InputLabel, Button, Paper } from "@material-ui/core";
 import { useState } from "react";
-import { useForm, Paper, Button } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FeedbackData } from "../../data/FeedbackData";
 import { sendFeedback } from "../../Request/Request";
 
 const FormFeedbacks = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const user_id = window.localStorage.getItem("user_id");
   const token = window.localStorage.getItem("auth_token");
@@ -37,7 +37,13 @@ const FormFeedbacks = () => {
               <InputLabel className="inputsLabel" htmlFor={name}>
                 {label}
               </InputLabel>
-              <Input name={name} inputRef={register} type={type} id={name} />
+              <Input
+                name={name}
+                inputRef={register}
+                type={type}
+                id={name}
+                error={!!errors.name}
+              />
             </div>
           );
         })}
