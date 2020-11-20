@@ -18,7 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { AuthenticatedData } from "../../data/AuthenticatedData";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -75,7 +75,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
   content: {
@@ -84,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Authenticated = () => {
+const MenuAuthenticated = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -168,14 +167,8 @@ const Authenticated = () => {
           <div className={classes.toolbar} />
         </main>
       </div>
-      <Switch>
-        <Route exact path="authenticated/users"></Route>
-        <Route exact path="authenticated/feedbacks"></Route>
-        <Route exact path="authenticated/feedback-form"></Route>
-        <Route exact path="authenticated/contact"></Route>
-      </Switch>
     </>
   );
 };
 
-export default Authenticated;
+export default MenuAuthenticated;

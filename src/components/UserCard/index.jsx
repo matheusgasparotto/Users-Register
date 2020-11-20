@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Users = () => {
+const UserCard = (user) => {
   const classes = useStyles();
 
   return (
@@ -49,4 +49,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UserCard;

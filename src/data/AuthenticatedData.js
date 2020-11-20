@@ -1,19 +1,19 @@
 export const AuthenticatedData = [
   {
     label: "Nunca",
-    url: "authenticated/users",
+    url: "/users",
   },
   {
     label: "Mais",
-    url: "authenticated/feedbacks",
+    url: "/feedbacks",
   },
   {
     label: "Comer",
-    url: "authenticated/feedback-form",
+    url: "/feedback-form",
   },
   {
     label: "Torresmo",
-    url: "authenticated/contact",
+    url: "/contact",
   },
   {
     label: "Log out",
