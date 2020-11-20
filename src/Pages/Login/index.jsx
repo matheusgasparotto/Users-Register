@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import { useState, useEffect } from "react";
-import Request from "../../Request/Request";
+import { Request } from "../../Request/Request";
 import { LoginData } from "../../data/LoginData";
 import { useHistory } from "react-router-dom";
 
@@ -46,8 +46,9 @@ const Login = ({ setAuthenticated }) => {
     resolver: yupResolver(schema),
   });
 
-  const Authenticate = (auth_token) => {
+  const Authenticate = (auth_token, user_id) => {
     window.localStorage.setItem("auth_token", auth_token);
+    window.localStorage.setItem("user_id", user_id);
     setAuthenticated(window.localStorage.getItem("auth_token"));
     setLoading(false);
     history.push("/authenticated");
@@ -60,7 +61,8 @@ const Login = ({ setAuthenticated }) => {
     try {
       result = await Request(request);
       const { auth_token } = result.data;
-      Authenticate(auth_token);
+      const { id } = result.data.user;
+      Authenticate(auth_token, id);
     } catch (error) {
       setLoading(false);
       setErrorsServer({ message: "Usuário ou senha invalidos" });
