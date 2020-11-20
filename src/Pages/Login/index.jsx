@@ -46,16 +46,20 @@ const Login = ({ setAuthenticated }) => {
     resolver: yupResolver(schema),
   });
 
+  const [loading, setLoading] = useState(false);
+  const [errorsServer, setErrorsServer] = useState();
+
+  const history = useHistory();
+
   const Authenticate = (auth_token) => {
-    setAuthenticated(true);
     window.localStorage.setItem("auth_token", auth_token);
+    setAuthenticated(window.localStorage.getItem("auth_token"));
     setLoading(false);
     history.push("/authenticated");
   };
 
   const handleLogin = async (data) => {
-    setErrorsServer(null);
-    setLoading(!loading);
+    setLoading(true);
     const request = { data: data, path: "authenticate" };
     let result;
     try {
