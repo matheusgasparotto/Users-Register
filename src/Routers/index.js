@@ -1,26 +1,13 @@
 import { useEffect, useState } from "react";
-import Authenticated from "../Pages/Authenticated";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { AppBar, Toolbar, Button } from "@material-ui/core";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
+import MenuHome from "../components/MenuHome";
+import MenuAuthenticated from "../components/MenuAuthenticated";
+import UsersList from "../Pages/UsersList";
 
 const Routers = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const history = useHistory();
-
-  const handleLogin = () => {
-    history.push("/login");
-  };
-
-  const handleSignUp = () => {
-    history.push("/signup");
-  };
-
-  useEffect(() => {
-    setMenuOpen(true);
-  }, []);
 
   const token = window.localStorage.getItem("auth_token");
   const [authenticated, setAuthenticated] = useState(token);
@@ -31,23 +18,18 @@ const Routers = () => {
 
   return (
     <>
-      <div className={menuOpen ? "menu-open" : "menu"}>
-        <AppBar position="static">
-          <Toolbar>
-            <Button color="inherit" onClick={handleLogin}>
-              Login
-            </Button>
-            <Button color="inherit" onClick={handleSignUp}>
-              Sign-up
-            </Button>
-          </Toolbar>
-        </AppBar>
-      </div>
+      {!authenticated ? <MenuHome /> : <MenuAuthenticated />}
       <Switch>
         {authenticated ? (
-          <Route exact path="/authenticated">
-            <Authenticated />
-          </Route>
+          <>
+            <Route exact path="/authenticated" />
+            <Route exact path="/users">
+              <UsersList list={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />
+            </Route>
+            <Route exact path="/feedbacks"></Route>
+            <Route exact path="/feedback-form"></Route>
+            <Route exact path="/contact"></Route>
+          </>
         ) : (
           <>
             <Route exact path="/login">
