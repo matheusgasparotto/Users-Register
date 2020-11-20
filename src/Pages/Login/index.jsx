@@ -46,11 +46,6 @@ const Login = ({ setAuthenticated }) => {
     resolver: yupResolver(schema),
   });
 
-  const [loading, setLoading] = useState(false);
-  const [errorsServer, setErrorsServer] = useState();
-
-  const history = useHistory();
-
   const Authenticate = (auth_token) => {
     window.localStorage.setItem("auth_token", auth_token);
     setAuthenticated(window.localStorage.getItem("auth_token"));
