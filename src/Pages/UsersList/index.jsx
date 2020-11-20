@@ -28,7 +28,7 @@ const UsersList = ({ list }) => {
       </ThemeProvider>
       <UsersContainer>
         {list.map((user, index) => (
-          <UserCard user={user} />
+          <UserCard key={index} user={user} />
         ))}
       </UsersContainer>
     </>

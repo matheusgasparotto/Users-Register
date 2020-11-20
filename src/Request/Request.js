@@ -30,10 +30,7 @@ export const sendFeedback = async ({ token, data, user_id }) => {
     },
   };
 
-  let res = await axios
-    .post(`${baseURL}${Path}`, data, headers)
-    .then((res) => console.log(res.data))
-    .catch((error) => console.log(error.response));
+  let res = await axios.post(`${baseURL}${Path}`, data, headers);
 
   console.log(res);
   return res;
