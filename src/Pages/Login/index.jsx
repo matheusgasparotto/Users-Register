@@ -38,6 +38,9 @@ const Login = ({ setAuthenticated }) => {
       },
     },
   });
+  const [loading, setLoading] = useState(false);
+  const [errorsServer, setErrorsServer] = useState();
+  const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -61,9 +64,8 @@ const Login = ({ setAuthenticated }) => {
     let result;
     try {
       result = await Request(request);
-      const { status } = result;
       const { auth_token } = result.data;
-      status === 200 && Authenticate(auth_token);
+      Authenticate(auth_token);
     } catch (error) {
       setLoading(false);
       setErrorsServer({ message: "Usuário ou senha invalidos" });
