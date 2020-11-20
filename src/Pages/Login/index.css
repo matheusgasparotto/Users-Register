@@ -1,11 +1,22 @@
 .cardLogin {
   margin-top: 20vh;
-  height: 50vh;
+  height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border-radius: 50%;
   width: 25vw;
+  border-radius: 20px;
+  transition: 2s;
+}
+
+.cardLogin-off {
+  overflow: hidden;
+  opacity: 0;
+}
+
+.cardLogin-on {
+  transition: 2s;
+  opacity: 1;
 }
 
 .inputs {
@@ -26,7 +37,6 @@
 }
 
 .sendButton {
-  background-color: #282c34;
   height: 50%;
   width: 60%;
 }
