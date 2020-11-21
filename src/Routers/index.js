@@ -6,6 +6,8 @@ import MenuHome from "../components/MenuHome";
 import MenuAuthenticated from "../components/MenuAuthenticated";
 import UsersList from "../Pages/UsersList";
 import FormFeedbacks from "../Pages/FormFeedback";
+import { HomeIcon } from "../components/Icons";
+import { IconContainer } from "../globalStyles";
 
 const Routers = () => {
   const history = useHistory();
@@ -35,6 +37,11 @@ const Routers = () => {
           </>
         ) : (
           <>
+            <Route exact path="/">
+              <IconContainer home>
+                <HomeIcon />
+              </IconContainer>
+            </Route>
             <Route exact path="/login">
               <Login setAuthenticated={setAuthenticated} />
             </Route>

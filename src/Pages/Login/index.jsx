@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { Request } from "../../Request/Request";
 import { LoginData, theme, schema_Login } from "../../helpers";
 import { useHistory } from "react-router-dom";
-import LoginIcon from "../../components/LoginIcon";
+import { LoginIcon } from "../../components/Icons/index";
 import {
   FormContainer,
   StyledPaper,
@@ -14,6 +14,7 @@ import {
   StyledInput,
   StyledButton,
   ButtonsContainer,
+  IconContainer,
 } from "../../globalStyles";
 
 const Login = ({ setAuthenticated }) => {
@@ -62,7 +63,7 @@ const Login = ({ setAuthenticated }) => {
         {loading ? (
           <CircularProgress />
         ) : (
-          <StyledPaper height={50} elevation={3} square={true}>
+          <StyledPaper height={40} elevation={3} square={true}>
             <form onSubmit={handleSubmit(handleLogin)}>
               {LoginData.map((input, index) => {
                 const { name, type, label } = input;
@@ -86,7 +87,13 @@ const Login = ({ setAuthenticated }) => {
                   errorsServer?.message}
               </p>
               <ButtonsContainer>
-                <StyledButton color="primary" variant="contained" type="submit">
+                <StyledButton
+                  height={7}
+                  width={9}
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                >
                   entrar
                 </StyledButton>
                 <Link href="#">Esqueceu a senha?</Link>
@@ -95,9 +102,9 @@ const Login = ({ setAuthenticated }) => {
           </StyledPaper>
         )}
       </ThemeProvider>
-      <div>
+      <IconContainer>
         <LoginIcon />
-      </div>
+      </IconContainer>
     </FormContainer>
   );
 };

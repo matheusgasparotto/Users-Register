@@ -51,7 +51,23 @@ export const ButtonsContainer = styled.div`
 
 export const StyledButton = styled(Button)`
   ${({ height, width }) => css`
-    height: ${height}vh
-    width: ${width}vw
+    height: ${height}vh;
+    width: ${width}vw;
   `}
+`;
+
+export const IconContainer = styled.div`
+  width: 50%;
+  overflow: hidden;
+  ${({ home }) =>
+    home &&
+    css`
+      margin: 0 auto;
+      height: 80vh;
+      margin-top: 5%;
+    `}
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
