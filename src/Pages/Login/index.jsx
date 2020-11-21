@@ -1,49 +1,20 @@
 import { Button, Input, Paper, InputLabel, Link } from "@material-ui/core";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  CircularProgress,
-} from "@material-ui/core";
+import { ThemeProvider, CircularProgress } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./index.css";
 import { useState, useEffect } from "react";
 import { Request } from "../../Request/Request";
-import { LoginData } from "../../data/LoginData";
+import { LoginData, theme, schema_Login } from "../../helpers";
 import { useHistory } from "react-router-dom";
 
 const Login = ({ setAuthenticated }) => {
-  const schema = yup.object().shape({
-    user: yup
-      .string("Formato de usuário inválido.")
-      .min(6, "Seu usuário deve ter no mínimo 6 caractéres.")
-      .required("Campo obrigatório."),
-    password: yup
-      .string("Formato de senha inválida.")
-      .min(6, "Sua senha deve ter no mínimo 6 caractéres.")
-      .matches(
-        /(?=.*[#$@!%&*?])/i,
-        "Sua senha deve ter no mínimo um caractér especial."
-      ),
-  });
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#282c34",
-      },
-      secondary: {
-        main: "#f44336",
-      },
-    },
-  });
   const [loading, setLoading] = useState(false);
   const [errorsServer, setErrorsServer] = useState();
   const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema_Login),
   });
 
   const Authenticate = (auth_token, user_id) => {

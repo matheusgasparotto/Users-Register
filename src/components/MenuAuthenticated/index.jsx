@@ -17,7 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { AuthenticatedData } from "../../data/AuthenticatedData";
+import { AuthenticatedData } from "../../helpers/";
 import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;

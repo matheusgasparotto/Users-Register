@@ -1,7 +1,7 @@
 import { Input, InputLabel, Button, Paper } from "@material-ui/core";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FeedbackData } from "../../data/FeedbackData";
+import { FeedbackData } from "../../helpers";
 import { sendFeedback } from "../../Request/Request";
 
 const FormFeedbacks = () => {
