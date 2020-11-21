@@ -117,3 +117,6 @@ export const schema_Login = yup.object().shape({
       "Sua senha deve ter no mínimo um caractér especial."
     ),
 });
+
+export const user_id = window.localStorage.getItem("user_id");
+export const token = window.localStorage.getItem("auth_token");

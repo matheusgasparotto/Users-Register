@@ -16,8 +16,11 @@ const useStyles = makeStyles({
   },
 });
 
-const UserCard = (user) => {
+const UserCard = ({ user }) => {
   const classes = useStyles();
+
+  const { name, image_url } = user;
+  console.log(image_url);
 
   return (
     <Card className={classes.root}>
@@ -26,17 +29,22 @@ const UserCard = (user) => {
           component="img"
           alt="Contemplative Reptile"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={
+            image_url
+              ? image_url
+              : "https://image.freepik.com/fotos-gratis/closeup-de-pato-borracha_53876-32073.jpg"
+          }
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          ></Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
