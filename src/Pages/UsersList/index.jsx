@@ -9,10 +9,9 @@ const UsersList = ({ list }) => {
     <>
       <ThemeProvider theme={theme}>
         <TextField
-          id="outlined-search"
-          label="Buscar usuário"
+          id="standard-search"
+          helperText="Buscar usuário"
           type="search"
-          variant="outlined"
           color="primary"
           style={{ marginLeft: "700px" }}
         />

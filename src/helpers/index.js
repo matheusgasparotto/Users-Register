@@ -42,19 +42,19 @@ export const FeedbackData = [
 
 export const AuthenticatedData = [
   {
-    label: "Nunca",
+    label: "Usuários",
     url: "/users",
   },
   {
-    label: "Mais",
+    label: "Feedbacks",
     url: "/feedbacks",
   },
   {
-    label: "Comer",
+    label: "Novo Feedback",
     url: "/feedback-form",
   },
   {
-    label: "Torresmo",
+    label: "Contato",
     url: "/contact",
   },
   {
