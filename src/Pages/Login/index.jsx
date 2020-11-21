@@ -1,49 +1,28 @@
-import { Button, Input, Paper, InputLabel, Link } from "@material-ui/core";
-import {
-  createMuiTheme,
-  ThemeProvider,
-  CircularProgress,
-} from "@material-ui/core";
+import { Link } from "@material-ui/core";
+import { ThemeProvider, CircularProgress } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import "./index.css";
 import { useState, useEffect } from "react";
 import { Request } from "../../Request/Request";
-import { LoginData } from "../../data/LoginData";
+import { LoginData, theme, schema_Login } from "../../helpers";
 import { useHistory } from "react-router-dom";
+import {
+  StyledPaper,
+  StyledInputLabel,
+  StyledInput,
+  StyledButton,
+  ButtonsContainer,
+  LoginContainer,
+} from "./styles";
+import LoginIcon from "../../components/LoginIcon";
 
 const Login = ({ setAuthenticated }) => {
-  const schema = yup.object().shape({
-    user: yup
-      .string("Formato de usuário inválido.")
-      .min(6, "Seu usuário deve ter no mínimo 6 caractéres.")
-      .required("Campo obrigatório."),
-    password: yup
-      .string("Formato de senha inválida.")
-      .min(6, "Sua senha deve ter no mínimo 6 caractéres.")
-      .matches(
-        /(?=.*[#$@!%&*?])/i,
-        "Sua senha deve ter no mínimo um caractér especial."
-      ),
-  });
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#282c34",
-      },
-      secondary: {
-        main: "#f44336",
-      },
-    },
-  });
   const [loading, setLoading] = useState(false);
   const [errorsServer, setErrorsServer] = useState();
   const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema_Login),
   });
 
   const Authenticate = (auth_token, user_id) => {
@@ -71,30 +50,27 @@ const Login = ({ setAuthenticated }) => {
     console.log(result);
   };
 
-  const [loginClass, setLoginClass] = useState("cardLogin-off ");
+  const [activate, setActivate] = useState(false);
 
   useEffect(() => {
-    setLoginClass("cardLogin-on ");
+    setActivate(true);
   }, []);
 
   return (
-    <div className={loginClass}>
+    <LoginContainer activate={activate}>
       <ThemeProvider theme={theme}>
         {loading ? (
           <CircularProgress />
         ) : (
-          <Paper elevation={3} square={true} className="cardLogin">
+          <StyledPaper elevation={3} square={true} className="cardLogin">
             <form onSubmit={handleSubmit(handleLogin)}>
               {LoginData.map((input, index) => {
                 const { name, type, label } = input;
 
                 return (
                   <div key={index}>
-                    <InputLabel className="inputsLabel" htmlFor={name}>
-                      {label}
-                    </InputLabel>
-                    <Input
-                      className="inputs"
+                    <StyledInputLabel htmlFor={name}>{label}</StyledInputLabel>
+                    <StyledInput
                       id={name}
                       name={name}
                       label={label}
@@ -109,24 +85,20 @@ const Login = ({ setAuthenticated }) => {
                   errors.password?.message ||
                   errorsServer?.message}
               </p>
-              <div className="buttons">
-                <Button
-                  color="primary"
-                  variant="contained"
-                  className="sendButton"
-                  type="submit"
-                >
+              <ButtonsContainer>
+                <StyledButton color="primary" variant="contained" type="submit">
                   entrar
-                </Button>
-                <Link className="forgotPass" href="#">
-                  Esqueceu a senha?
-                </Link>
-              </div>
+                </StyledButton>
+                <Link href="#">Esqueceu a senha?</Link>
+              </ButtonsContainer>
             </form>
-          </Paper>
+          </StyledPaper>
         )}
       </ThemeProvider>
-    </div>
+      <div>
+        <LoginIcon />
+      </div>
+    </LoginContainer>
   );
 };
 
