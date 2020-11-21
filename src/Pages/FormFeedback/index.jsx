@@ -3,12 +3,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FeedbackData } from "../../helpers";
 import { sendFeedback } from "../../Request/Request";
+import { user_id, token } from "../../helpers";
 
 const FormFeedbacks = () => {
   const { register, handleSubmit, errors } = useForm();
-
-  const user_id = window.localStorage.getItem("user_id");
-  const token = window.localStorage.getItem("auth_token");
 
   const [message, setMessage] = useState();
 

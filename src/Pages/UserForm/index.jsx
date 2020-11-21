@@ -73,12 +73,7 @@ const UserForm = () => {
                 errors.password_confirmation?.message}
             </p>
             <ButtonsContainer>
-              <StyledButton
-                variant="contained"
-                type="submit"
-                color="primary"
-                className="requestButton"
-              >
+              <StyledButton variant="contained" type="submit" color="primary">
                 Enviar
               </StyledButton>
             </ButtonsContainer>

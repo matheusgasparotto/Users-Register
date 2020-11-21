@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -10,24 +10,16 @@ import { HomeIcon } from "../components/Icons";
 import { IconContainer } from "../globalStyles";
 
 const Routers = () => {
-  const history = useHistory();
-
   const token = window.localStorage.getItem("auth_token");
-  const [authenticated, setAuthenticated] = useState(token);
-
-  useEffect(() => {
-    token && history.push("/authenticated");
-  });
 
   return (
     <>
-      {!authenticated ? <MenuHome /> : <MenuAuthenticated />}
+      {!token ? <MenuHome /> : <MenuAuthenticated />}
       <Switch>
-        {authenticated ? (
+        {token ? (
           <>
-            <Route exact path="/authenticated" />
             <Route exact path="/users">
-              <UsersList list={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]} />
+              <UsersList />
             </Route>
             <Route exact path="/feedbacks"></Route>
             <Route exact path="/feedback-form">
@@ -43,7 +35,7 @@ const Routers = () => {
               </IconContainer>
             </Route>
             <Route exact path="/login">
-              <Login setAuthenticated={setAuthenticated} />
+              <Login />
             </Route>
             <Route exact path="/signup">
               <SignUp />
