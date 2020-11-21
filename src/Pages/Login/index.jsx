@@ -6,15 +6,15 @@ import { useState, useEffect } from "react";
 import { Request } from "../../Request/Request";
 import { LoginData, theme, schema_Login } from "../../helpers";
 import { useHistory } from "react-router-dom";
+import LoginIcon from "../../components/LoginIcon";
 import {
+  FormContainer,
   StyledPaper,
   StyledInputLabel,
   StyledInput,
   StyledButton,
   ButtonsContainer,
-  LoginContainer,
-} from "./styles";
-import LoginIcon from "../../components/LoginIcon";
+} from "../../globalStyles";
 
 const Login = ({ setAuthenticated }) => {
   const [loading, setLoading] = useState(false);
@@ -57,12 +57,12 @@ const Login = ({ setAuthenticated }) => {
   }, []);
 
   return (
-    <LoginContainer activate={activate}>
+    <FormContainer height={80} activate={activate}>
       <ThemeProvider theme={theme}>
         {loading ? (
           <CircularProgress />
         ) : (
-          <StyledPaper elevation={3} square={true} className="cardLogin">
+          <StyledPaper height={50} elevation={3} square={true}>
             <form onSubmit={handleSubmit(handleLogin)}>
               {LoginData.map((input, index) => {
                 const { name, type, label } = input;
@@ -98,7 +98,7 @@ const Login = ({ setAuthenticated }) => {
       <div>
         <LoginIcon />
       </div>
-    </LoginContainer>
+    </FormContainer>
   );
 };
 
