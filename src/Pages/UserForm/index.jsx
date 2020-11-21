@@ -1,4 +1,5 @@
 import "./index.css";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +7,14 @@ import { Input, Button, InputLabel, Paper } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core";
 import { Request } from "../../Request/Request";
 import { FormData, theme, schema_Signup } from "../../helpers";
+import {
+  FormContainer,
+  StyledPaper,
+  StyledInputLabel,
+  StyledInput,
+  StyledButton,
+  ButtonsContainer,
+} from "../../globalStyles";
 
 const UserForm = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -22,19 +31,30 @@ const UserForm = () => {
     status === 201 && history.push("/login");
   };
 
+  const [activate, setActivate] = useState(false);
+
+  useEffect(() => {
+    setActivate(true);
+  }, []);
+
   return (
-    <div>
+    <FormContainer height={90} activate={activate}>
       <ThemeProvider theme={theme}>
-        <Paper elevation={3} square={true} className="cardSignUp">
+        <StyledPaper
+          height={73}
+          elevation={3}
+          square={true}
+          className="cardLogin"
+        >
           <form onSubmit={handleSubmit(handleForm)} className="form">
             {FormData.map((input, index) => {
               const { name, label, type } = input;
               return (
                 <div key={index}>
-                  <InputLabel className="inputsLabel" htmlFor={name}>
+                  <StyledInputLabel className="inputsLabel" htmlFor={name}>
                     {label}
-                  </InputLabel>
-                  <Input
+                  </StyledInputLabel>
+                  <StyledInput
                     name={name}
                     inputRef={register}
                     error={!!errors.name}
@@ -51,20 +71,20 @@ const UserForm = () => {
                 errors.password?.message ||
                 errors.password_confirmation?.message}
             </p>
-            <div>
-              <Button
+            <ButtonsContainer>
+              <StyledButton
                 variant="contained"
                 type="submit"
                 color="primary"
                 className="requestButton"
               >
                 Enviar
-              </Button>
-            </div>
+              </StyledButton>
+            </ButtonsContainer>
           </form>
-        </Paper>
+        </StyledPaper>
       </ThemeProvider>
-    </div>
+    </FormContainer>
   );
 };
 

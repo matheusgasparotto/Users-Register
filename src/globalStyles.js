@@ -1,10 +1,28 @@
 import { Paper, InputLabel, Input, Button } from "@material-ui/core";
 import styled, { css } from "styled-components";
 
+export const FormContainer = styled.div`
+  overflow: hidden;
+  opacity: 0;
+
+  ${({ activate }) =>
+    activate &&
+    css`
+      transition: 2s;
+      opacity: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    `};
+  ${({ height }) => css`
+    height: ${height}vh;
+  `}
+`;
+
 export const StyledPaper = styled(Paper)`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 25vw;
   border-radius: 20px;
   transition: 2s;
@@ -14,13 +32,12 @@ export const StyledPaper = styled(Paper)`
     height: ${height}vh;
   `}
 `;
-
 export const StyledInputLabel = styled(InputLabel)`
-  margin-top: 15px;
+  margin-top: 10px;
 `;
 
 export const StyledInput = styled(Input)`
-  margin: 3%;
+  margin: 2%;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -33,6 +50,8 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-  height: 50%;
-  width: 60%;
+  ${({ height, width }) => css`
+    height: ${height}vh
+    width: ${width}vw
+  `}
 `;
