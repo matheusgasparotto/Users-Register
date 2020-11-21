@@ -51,7 +51,7 @@ export const ButtonsContainer = styled.div`
 
 export const StyledButton = styled(Button)`
   ${({ height, width }) => css`
-    height: ${height}vh
-    width: ${width}vw
+    height: ${height}vh;
+    width: ${width}vw;
   `}
 `;

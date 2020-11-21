@@ -89,12 +89,17 @@ const MenuAuthenticated = () => {
   const [open, setOpen] = useState(false);
   const history = useHistory();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawer = () => {
+    setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerRedirect = (text) => {
+    if (open) {
+      setOpen(!open);
+      history.push(text.url);
+    } else {
+      history.push(text.url);
+    }
   };
 
   return (
@@ -111,7 +116,7 @@ const MenuAuthenticated = () => {
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={handleDrawerOpen}
+              onClick={handleDrawer}
               edge="start"
               className={clsx(classes.menuButton, {
                 [classes.hide]: open,
@@ -120,7 +125,7 @@ const MenuAuthenticated = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Fiz uma promessa pra mim mesmo...
+              Feedack Culture
             </Typography>
           </Toolbar>
         </AppBar>
@@ -138,7 +143,7 @@ const MenuAuthenticated = () => {
           }}
         >
           <div className={classes.toolbar}>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton onClick={handleDrawer}>
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (
@@ -152,7 +157,9 @@ const MenuAuthenticated = () => {
               <ListItem
                 button
                 key={text}
-                onClick={() => history.push(text.url)}
+                onClick={() => {
+                  open ? handleDrawerRedirect(text) : history.push(text.url);
+                }}
               >
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
