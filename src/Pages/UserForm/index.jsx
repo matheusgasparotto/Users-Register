@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Button, InputLabel, Paper } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core";
 import { Request } from "../../Request/Request";
 import { FormData, theme, schema_Signup } from "../../helpers";
@@ -14,7 +13,9 @@ import {
   StyledInput,
   StyledButton,
   ButtonsContainer,
+  IconContainer,
 } from "../../globalStyles";
+import { SignupIcon } from "../../components/Icons";
 
 const UserForm = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -84,6 +85,9 @@ const UserForm = () => {
           </form>
         </StyledPaper>
       </ThemeProvider>
+      <IconContainer>
+        <SignupIcon />
+      </IconContainer>
     </FormContainer>
   );
 };
