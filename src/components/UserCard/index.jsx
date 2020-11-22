@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -19,8 +20,13 @@ const useStyles = makeStyles({
 const UserCard = ({ user }) => {
   const classes = useStyles();
 
-  const { name, image_url } = user;
-  console.log(user);
+  const { id, name, image_url, email } = user;
+
+  const history = useHistory();
+
+  const go_Feedbacks = () => {
+    history.push(`/feedbacks/${id}`);
+  };
 
   return (
     <Card className={classes.root}>
@@ -40,19 +46,17 @@ const UserCard = ({ user }) => {
           <Typography gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          ></Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {user.user}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {email}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+        <Button size="small" color="primary" onClick={go_Feedbacks}>
+          Feedbacks
         </Button>
       </CardActions>
     </Card>

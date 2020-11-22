@@ -3,20 +3,28 @@ import FeedbackCard from "../../components/FeedbackCard";
 import { CardsContainer } from "../../globalStyles";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../../Request/Request";
-
 import { token, user_id } from "../../helpers";
+import { useParams } from "react-router-dom";
 
 const FeedbacksList = () => {
   const [list, setList] = useState([]);
 
+  const [path, setPath] = useState();
+
+  const { id } = useParams();
+
   const requestFeedback = async () => {
-    const path = `/users/${user_id}/feedbacks`;
+    console.log(path);
     setList(await usersRequest(token, path));
   };
 
   useEffect(() => {
-    requestFeedback();
+    setPath(id ? `/users/${id}/feedbacks/` : `/users/${user_id}/feedbacks`);
   }, []);
+
+  useEffect(async () => {
+    requestFeedback();
+  }, [path]);
 
   return (
     <CardsContainer>

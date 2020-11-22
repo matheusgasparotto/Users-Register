@@ -4,8 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import { ThemeProvider } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { theme } from "../../helpers";
-import { usersRequest } from "../../Request/Request";
-import { token } from "../../helpers";
 
 const UsersList = ({ list }) => {
   return (
