@@ -1,4 +1,3 @@
-import { Input, InputLabel, Button, Paper } from "@material-ui/core";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FeedbackData } from "../../helpers";
@@ -6,9 +5,17 @@ import { sendFeedback } from "../../Request/Request";
 import { user_id, token } from "../../helpers";
 import Rating from "@material-ui/lab/Rating";
 import { Alert } from "@material-ui/lab";
+import {
+  StyledPaper,
+  FormContainer,
+  StyledInputLabel,
+  StyledInput,
+  ButtonsContainer,
+  StyledButton,
+} from "../../globalStyles";
 
 const FormFeedbacks = () => {
-  const { register, handleSubmit, errors, unregister } = useForm();
+  const { register, handleSubmit, unregister } = useForm();
 
   const [alert, setAlert] = useState();
   const [response, setResponse] = useState();
@@ -52,47 +59,50 @@ const FormFeedbacks = () => {
       {response ? (
         <Alert severity={alert.result}>{alert.message}</Alert>
       ) : (
-        <Paper>
-          <form onSubmit={handleSubmit(handleFeedback)}>
-            {FeedbackData.map((input, index) => {
-              const { name, label, type } = input;
-              return (
-                <div key={index}>
-                  <InputLabel className="inputsLabel" htmlFor={name}>
-                    {label}
-                  </InputLabel>
-                  <Input
-                    name={name}
-                    inputRef={register}
-                    type={type}
-                    id={name}
-                    error={!!errors.name}
-                  />
-                </div>
-              );
-            })}
-            <InputLabel className="inputsLabel" htmlFor="grade">
-              Nota
-            </InputLabel>
-            <Rating
-              id="grade"
-              precision={0.5}
-              onChange={(e) => {
-                setGrade(e.target.value * 2);
-              }}
-              name="grade"
-              max={5}
-            />
-            <Button
-              variant="contained"
-              type="submit"
-              color="primary"
-              className="requestButton"
-            >
-              Enviar
-            </Button>
-          </form>
-        </Paper>
+        <FormContainer activate height={50}>
+          <StyledPaper height={45}>
+            <form onSubmit={handleSubmit(handleFeedback)}>
+              {FeedbackData.map((input, index) => {
+                const { name, label, type } = input;
+                return (
+                  <div key={index}>
+                    <StyledInputLabel className="inputsLabel" htmlFor={name}>
+                      {label}
+                    </StyledInputLabel>
+                    <StyledInput
+                      name={name}
+                      inputRef={register}
+                      type={type}
+                      id={name}
+                    />
+                  </div>
+                );
+              })}
+              <StyledInputLabel className="inputsLabel" htmlFor="grade">
+                Nota
+              </StyledInputLabel>
+              <Rating
+                id="grade"
+                precision={0.5}
+                onChange={(e) => {
+                  setGrade(e.target.value * 2);
+                }}
+                name="grade"
+                max={5}
+              />
+              <ButtonsContainer>
+                <StyledButton
+                  variant="contained"
+                  type="submit"
+                  color="primary"
+                  className="requestButton"
+                >
+                  Enviar
+                </StyledButton>
+              </ButtonsContainer>
+            </form>
+          </StyledPaper>
+        </FormContainer>
       )}
     </>
   );
