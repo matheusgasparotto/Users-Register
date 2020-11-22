@@ -7,47 +7,60 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { UsersData } from "../../data/UsersData";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    width: 230,
+    margin: 10,
+    marginTop: 20,
   },
 });
 
-const Users = () => {
+const UserCard = ({ user }) => {
   const classes = useStyles();
+
+  const { id, name, image_url, email } = user;
+
+  const history = useHistory();
+
+  const go_Feedbacks = () => {
+    history.push(`/feedbacks/${id}`);
+  };
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={name}
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={
+            image_url
+              ? image_url
+              : "https://image.freepik.com/fotos-gratis/closeup-de-pato-borracha_53876-32073.jpg"
+          }
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {user.user}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {email}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+        <Button size="small" color="primary" onClick={go_Feedbacks}>
+          Feedbacks
         </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default Users;
+export default UserCard;

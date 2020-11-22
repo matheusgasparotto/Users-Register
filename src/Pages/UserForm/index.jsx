@@ -1,57 +1,25 @@
 import "./index.css";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Route, useHistory } from "react-router-dom";
-import * as yup from "yup";
+import { useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Input, Button, InputLabel, Paper } from "@material-ui/core";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import Request from "../../Request/Request";
-import { FormData } from "../../data/FormData";
+import { ThemeProvider } from "@material-ui/core";
+import { Request } from "../../Request/Request";
+import { FormData, theme, schema_Signup } from "../../helpers";
+import {
+  FormContainer,
+  StyledPaper,
+  StyledInputLabel,
+  StyledInput,
+  StyledButton,
+  ButtonsContainer,
+  IconContainer,
+} from "../../globalStyles";
+import { SignupIcon } from "../../components/Icons";
 
 const UserForm = () => {
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#282c34",
-      },
-      secondary: {
-        main: "#f44336",
-      },
-    },
-  });
-
-  const schema = yup.object().shape({
-    user: yup
-      .string("Formato de usuário inválido.")
-      .min(6, "Seu usuário deve ter no mínimo 6 caractéres.")
-      .required("Campo obrigatório."),
-    name: yup
-      .string("Formato de nome inválido.")
-      .matches(
-        /\b[A-Za-zÀ-ú][A-Za-zÀ-ú]+,?\s[A-Za-zÀ-ú][A-Za-zÀ-ú]{2,19}\b/gi,
-        "Informar nome e sobrenome contendo apenas letras."
-      )
-      .required("Campo obrigatório."),
-    email: yup
-      .string("Formato de e-mail inválido.")
-      .email("Formato de e-mail inválido.")
-      .required("Campo obrigatório."),
-    password: yup
-      .string("Formato de senha inválida.")
-      .min(6, "Sua senha deve ter no mínimo 6 caractéres.")
-      .matches(
-        /(?=.*[#$@!%&*?])/i,
-        "Sua senha deve ter no mínimo um caractér especial."
-      )
-      .required("Campo obrigatório."),
-    password_confirmation: yup
-      .string("Formato de senha inválida.")
-      .oneOf([yup.ref("password")], "Suas senhas não correspondem.")
-      .required("Campo obrigatório."),
-  });
-
   const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema_Signup),
   });
 
   const history = useHistory();
@@ -64,19 +32,30 @@ const UserForm = () => {
     status === 201 && history.push("/login");
   };
 
+  const [activate, setActivate] = useState(false);
+
+  useEffect(() => {
+    setActivate(true);
+  }, []);
+
   return (
-    <div>
+    <FormContainer height={90} activate={activate}>
       <ThemeProvider theme={theme}>
-        <Paper elevation={3} square={true} className="cardSignUp">
+        <StyledPaper
+          height={73}
+          elevation={3}
+          square={true}
+          className="cardLogin"
+        >
           <form onSubmit={handleSubmit(handleForm)} className="form">
             {FormData.map((input, index) => {
               const { name, label, type } = input;
               return (
                 <div key={index}>
-                  <InputLabel className="inputsLabel" htmlFor={name}>
+                  <StyledInputLabel className="inputsLabel" htmlFor={name}>
                     {label}
-                  </InputLabel>
-                  <Input
+                  </StyledInputLabel>
+                  <StyledInput
                     name={name}
                     inputRef={register}
                     error={!!errors.name}
@@ -93,20 +72,18 @@ const UserForm = () => {
                 errors.password?.message ||
                 errors.password_confirmation?.message}
             </p>
-            <div>
-              <Button
-                variant="contained"
-                type="submit"
-                color="primary"
-                className="requestButton"
-              >
+            <ButtonsContainer>
+              <StyledButton variant="contained" type="submit" color="primary">
                 Enviar
-              </Button>
-            </div>
+              </StyledButton>
+            </ButtonsContainer>
           </form>
-        </Paper>
+        </StyledPaper>
       </ThemeProvider>
-    </div>
+      <IconContainer>
+        <SignupIcon />
+      </IconContainer>
+    </FormContainer>
   );
 };
 

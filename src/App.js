@@ -1,13 +1,10 @@
 import "./App.css";
-import { Route, Switch, useHistory } from "react-router-dom";
-import Home from "./Pages/Home";
-
-import * as yup from "yup";
+import Routers from "./Routers";
 
 const App = () => {
   return (
     <div className="App">
-      <Home />
+      <Routers />
     </div>
   );
 };
