@@ -1,15 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import FeedbackCard from "../../components/FeedbackCard";
 import { CardsContainer } from "../../globalStyles";
 import { useState, useEffect } from "react";
-import { feedbackRequest } from "../../Request/Request";
+import { usersRequest } from "../../Request/Request";
+
 import { token, user_id } from "../../helpers";
 
 const FeedbacksList = () => {
   const [list, setList] = useState([]);
 
   const requestFeedback = async () => {
-    setList(await feedbackRequest(token, user_id));
-    console.log(list);
+    const path = `/users/${user_id}/feedbacks`;
+    setList(await usersRequest(token, path));
   };
 
   useEffect(() => {
@@ -18,9 +20,9 @@ const FeedbacksList = () => {
 
   return (
     <CardsContainer>
-      {list.map((feedback, index) => (
-        <FeedbackCard key={index} feedback={feedback} />
-      ))}
+      {list.map((feedback, index) => {
+        return <FeedbackCard key={index} feedback={feedback} />;
+      })}
     </CardsContainer>
   );
 };
