@@ -25,7 +25,6 @@ const Routers = () => {
   const location = useLocation();
   useEffect(() => {
     token && requestUsers();
-    console.log(location);
   }, [location]);
 
   return (

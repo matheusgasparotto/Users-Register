@@ -16,9 +16,9 @@ const FormFeedbacks = () => {
     let result;
     try {
       result = await sendFeedback({
-        token: token,
+        token: token(),
         data: data,
-        user_id: user_id,
+        user_id: user_id(),
       });
       setMessage("Feedback cadastrado com sucesso");
     } catch (error) {
