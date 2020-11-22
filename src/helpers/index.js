@@ -117,5 +117,6 @@ export const schema_Login = yup.object().shape({
     ),
 });
 
-export const user_id = window.localStorage.getItem("user_id");
-export const token = window.localStorage.getItem("auth_token");
+export const user_id = () => window.localStorage.getItem("user_id");
+
+export const token = () => window.localStorage.getItem("auth_token");

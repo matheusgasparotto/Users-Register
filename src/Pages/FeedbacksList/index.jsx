@@ -4,7 +4,7 @@ import { CardsContainer } from "../../globalStyles";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../../Request/Request";
 import { token, user_id } from "../../helpers";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 const FeedbacksList = () => {
   const [list, setList] = useState([]);
@@ -15,14 +15,15 @@ const FeedbacksList = () => {
 
   const requestFeedback = async () => {
     console.log(path);
-    setList(await usersRequest(token, path));
+    setList(await usersRequest(token(), path));
   };
 
   useEffect(() => {
-    setPath(id ? `/users/${id}/feedbacks/` : `/users/${user_id}/feedbacks`);
+    setPath(id ? `/users/${id}/feedbacks/` : `/users/${user_id()}/feedbacks`);
   }, []);
 
   useEffect(async () => {
+    console.log(path);
     requestFeedback();
   }, [path]);
 
