@@ -34,3 +34,17 @@ export const sendFeedback = async ({ token, data, user_id }) => {
 
   return res;
 };
+
+export const feedbackRequest = async ({ token, user_id }) => {
+  const baseURL = "https://ka-users-api.herokuapp.com";
+  const Path = `/users/${user_id}/feedbacks`;
+  const headers = {
+    headers: {
+      Authorization: token,
+    },
+  };
+
+  let res = await axios.get(`${baseURL}${Path}`, headers);
+  let result = await res.data;
+  return result;
+};

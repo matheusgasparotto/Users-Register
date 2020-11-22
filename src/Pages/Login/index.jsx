@@ -30,7 +30,7 @@ const Login = () => {
     window.localStorage.setItem("auth_token", auth_token);
     window.localStorage.setItem("user_id", user_id);
     setLoading(false);
-    history.push("/authenticated");
+    history.push("/users");
   };
 
   const handleLogin = async (data) => {

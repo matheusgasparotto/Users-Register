@@ -1,5 +1,5 @@
 import UserCard from "../../components/UserCard";
-import { UsersContainer } from "./styles";
+import { CardsContainer } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
 import { ThemeProvider } from "@material-ui/core";
 import { useEffect, useState } from "react";
@@ -31,11 +31,11 @@ const UsersList = () => {
           style={{ marginLeft: "700px" }}
         />
       </ThemeProvider>
-      <UsersContainer>
+      <CardsContainer>
         {list.map((user, index) => (
           <UserCard key={index} user={user} />
         ))}
-      </UsersContainer>
+      </CardsContainer>
     </>
   );
 };
