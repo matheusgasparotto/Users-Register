@@ -33,7 +33,7 @@ const Routers = () => {
 
   return (
     <>
-      {!token ? <MenuHome /> : <MenuAuthenticated />}
+      {token ? <MenuAuthenticated /> : <MenuHome />}
       <Switch>
         {token ? (
           <>

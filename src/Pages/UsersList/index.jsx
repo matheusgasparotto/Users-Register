@@ -5,7 +5,24 @@ import { ThemeProvider } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { theme } from "../../helpers";
 
-const UsersList = ({ list }) => {
+const UsersList = () => {
+  const [list, setList] = useState([]);
+  const [input, setInput] = useState("");
+
+  const requestFeedback = async () => {
+    const path = `/users`;
+    setList(await usersRequest(token, path));
+    console.log(list);
+  };
+
+  const handleInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  useEffect(() => {
+    requestFeedback();
+  }, []);
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -15,12 +32,16 @@ const UsersList = ({ list }) => {
           type="search"
           color="primary"
           style={{ marginLeft: "700px" }}
+          onChange={handleInput}
+          value={input}
         />
       </ThemeProvider>
       <CardsContainer>
-        {list.map((user, index) => (
-          <UserCard key={index} user={user} />
-        ))}
+        {input
+          ? list
+              .filter((user, index) => input.toLowerCase().includes(user.name))
+              .map((user, index) => <UserCard key={index} user={user} />)
+          : list.map((user, index) => <UserCard key={index} user={user} />)}
       </CardsContainer>
     </>
   );
