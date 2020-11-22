@@ -20,14 +20,14 @@ const UserCard = ({ user }) => {
   const classes = useStyles();
 
   const { name, image_url } = user;
-  console.log(image_url);
+  console.log(user);
 
   return (
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt="Contemplative Reptile"
+          alt={name}
           height="140"
           image={
             image_url

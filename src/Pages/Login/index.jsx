@@ -17,7 +17,7 @@ import {
   IconContainer,
 } from "../../globalStyles";
 
-const Login = () => {
+const Login = ({ setAuthenticated }) => {
   const [loading, setLoading] = useState(false);
   const [errorsServer, setErrorsServer] = useState();
   const history = useHistory();
@@ -29,6 +29,7 @@ const Login = () => {
   const Authenticate = (auth_token, user_id) => {
     window.localStorage.setItem("auth_token", auth_token);
     window.localStorage.setItem("user_id", user_id);
+    setAuthenticated(true);
     setLoading(false);
     history.push("/users");
   };

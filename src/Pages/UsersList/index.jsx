@@ -7,19 +7,7 @@ import { theme } from "../../helpers";
 import { usersRequest } from "../../Request/Request";
 import { token } from "../../helpers";
 
-const UsersList = () => {
-  const [list, setList] = useState([]);
-
-  const requestFeedback = async () => {
-    const path = `/users`;
-    setList(await usersRequest(token, path));
-    console.log(list);
-  };
-
-  useEffect(() => {
-    requestFeedback();
-  }, []);
-
+const UsersList = ({ list }) => {
   return (
     <>
       <ThemeProvider theme={theme}>

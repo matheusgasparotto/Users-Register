@@ -34,9 +34,7 @@ const FeedbackCard = ({ feedback }) => {
           {feedback.name}
         </Typography>
         <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+          {feedback.comment}
         </Typography>
       </CardContent>
       <CardActions>
