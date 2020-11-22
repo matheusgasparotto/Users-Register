@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -11,24 +11,22 @@ import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../Request/Request";
-import { token } from "../helpers";
 
 const Routers = () => {
-  const [authenticated, setAuthenticated] = useState(false);
+  const token = window.localStorage.getItem("auth_token");
 
   const [list, setList] = useState([]);
 
   const requestUsers = async () => {
-    console.log("oi");
     const path = `/users`;
     setList(await usersRequest(token, path));
   };
 
-  const history = useHistory();
+  const location = useLocation();
   useEffect(() => {
-    token && history.push("/users");
     token && requestUsers();
-  }, []);
+    console.log(location);
+  }, [location]);
 
   return (
     <>
@@ -58,7 +56,7 @@ const Routers = () => {
               </IconContainer>
             </Route>
             <Route exact path="/login">
-              <Login setAuthenticated={setAuthenticated} />
+              <Login />
             </Route>
             <Route exact path="/signup">
               <SignUp />
