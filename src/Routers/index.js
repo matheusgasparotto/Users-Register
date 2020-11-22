@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Route, Switch } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
@@ -8,9 +10,24 @@ import FormFeedbacks from "../Pages/FormFeedback";
 import { HomeIcon } from "../components/Icons";
 import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
+import { useState, useEffect } from "react";
+import { usersRequest } from "../Request/Request";
 
 const Routers = () => {
   const token = window.localStorage.getItem("auth_token");
+
+  const [_authenticated, setAuthenticated] = useState(false);
+
+  const [list, setList] = useState([]);
+
+  const requestFeedback = async () => {
+    const path = `/users`;
+    setList(await usersRequest(token, path));
+  };
+
+  useEffect(() => {
+    token && requestFeedback();
+  }, [token]);
 
   return (
     <>
@@ -19,7 +36,7 @@ const Routers = () => {
         {token ? (
           <>
             <Route exact path="/users">
-              <UsersList />
+              <UsersList list={list} />
             </Route>
             <Route exact path="/feedbacks">
               <FeedbacksList />
@@ -37,7 +54,7 @@ const Routers = () => {
               </IconContainer>
             </Route>
             <Route exact path="/login">
-              <Login />
+              <Login setAuthenticated={setAuthenticated} />
             </Route>
             <Route exact path="/signup">
               <SignUp />
