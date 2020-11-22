@@ -7,6 +7,7 @@ import { theme, token } from "../../helpers";
 import { usersRequest } from "../../Request/Request";
 
 const UsersList = () => {
+  const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
 
   const handleInput = (e) => {
@@ -18,15 +19,17 @@ const UsersList = () => {
   const requestUsers = async () => {
     const path = `/users`;
     setList(await usersRequest(token(), path));
+    setLoading(false);
   };
 
   useEffect(() => {
+    setLoading(true);
     requestUsers();
   }, []);
 
   return (
     <>
-      {!list ? (
+      {loading ? (
         <CircularProgress />
       ) : (
         <>
