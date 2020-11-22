@@ -32,6 +32,7 @@ export const StyledPaper = styled(Paper)`
     height: ${height}vh;
   `}
 `;
+
 export const StyledInputLabel = styled(InputLabel)`
   margin-top: 10px;
 `;
