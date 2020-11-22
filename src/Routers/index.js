@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -25,8 +25,10 @@ const Routers = () => {
     setList(await usersRequest(token, path));
   };
 
+  const history = useHistory();
   useEffect(() => {
     token && requestFeedback();
+    token && history.push("/users");
   }, [token]);
 
   return (
@@ -39,6 +41,9 @@ const Routers = () => {
               <UsersList list={list} />
             </Route>
             <Route exact path="/feedbacks">
+              <FeedbacksList />
+            </Route>
+            <Route path="/feedbacks/:id">
               <FeedbacksList />
             </Route>
             <Route exact path="/feedback-form">

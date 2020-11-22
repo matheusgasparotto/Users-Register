@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { FeedbackData } from "../../helpers";
 import { sendFeedback } from "../../Request/Request";
 import { user_id, token } from "../../helpers";
+import Rating from "@material-ui/lab/Rating";
 
 const FormFeedbacks = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -11,7 +12,7 @@ const FormFeedbacks = () => {
   const [message, setMessage] = useState();
 
   const handleFeedback = async (body) => {
-    const data = { feedback: body };
+    const data = { feedback: { ...body, grade: grade } };
     let result;
     try {
       result = await sendFeedback({
@@ -24,6 +25,8 @@ const FormFeedbacks = () => {
       setMessage("Mensagem não cadastrada, tente novamente mais tarde");
     }
   };
+
+  const [grade, setGrade] = useState();
 
   return (
     <Paper>
@@ -45,6 +48,18 @@ const FormFeedbacks = () => {
             </div>
           );
         })}
+        <InputLabel className="inputsLabel" htmlFor="grade">
+          Nota
+        </InputLabel>
+        <Rating
+          id="grade"
+          precision={0.5}
+          onChange={(e) => {
+            setGrade(e.target.value * 2);
+          }}
+          name="grade"
+          max={5}
+        />
         <Button
           variant="contained"
           type="submit"
