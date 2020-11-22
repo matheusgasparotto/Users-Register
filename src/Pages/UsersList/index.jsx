@@ -2,26 +2,15 @@ import UserCard from "../../components/UserCard";
 import { CardsContainer } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
 import { ThemeProvider } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { theme } from "../../helpers";
 
-const UsersList = () => {
-  const [list, setList] = useState([]);
+const UsersList = ({ list }) => {
   const [input, setInput] = useState("");
 
-  const requestFeedback = async () => {
-    const path = `/users`;
-    setList(await usersRequest(token, path));
-    console.log(list);
-  };
-
   const handleInput = (e) => {
-    setInput(e.target.value);
+    setInput(e.target.value.toLowerCase());
   };
-
-  useEffect(() => {
-    requestFeedback();
-  }, []);
 
   return (
     <>
@@ -39,7 +28,7 @@ const UsersList = () => {
       <CardsContainer>
         {input
           ? list
-              .filter((user, index) => input.toLowerCase().includes(user.name))
+              .filter((user) => user.name?.toLowerCase().includes(input))
               .map((user, index) => <UserCard key={index} user={user} />)
           : list.map((user, index) => <UserCard key={index} user={user} />)}
       </CardsContainer>
