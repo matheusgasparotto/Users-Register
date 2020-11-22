@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Route, Switch, useHistory } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
@@ -12,24 +11,24 @@ import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../Request/Request";
+import { token } from "../helpers";
 
 const Routers = () => {
-  const token = window.localStorage.getItem("auth_token");
-
-  const [_authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
   const [list, setList] = useState([]);
 
-  const requestFeedback = async () => {
+  const requestUsers = async () => {
+    console.log("oi");
     const path = `/users`;
     setList(await usersRequest(token, path));
   };
 
   const history = useHistory();
   useEffect(() => {
-    token && requestFeedback();
     token && history.push("/users");
-  }, [token]);
+    token && requestUsers();
+  }, []);
 
   return (
     <>
