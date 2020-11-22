@@ -26,10 +26,9 @@ const Login = ({ setAuthenticated }) => {
     resolver: yupResolver(schema_Login),
   });
 
-  const Authenticate = (auth_token, user_id) => {
+  const Authenticate = async (auth_token, user_id) => {
     window.localStorage.setItem("auth_token", auth_token);
     window.localStorage.setItem("user_id", user_id);
-    setAuthenticated(true);
     setLoading(false);
     history.push("/users");
   };
