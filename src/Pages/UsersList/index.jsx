@@ -2,16 +2,27 @@ import UserCard from "../../components/UserCard";
 import { CardsContainer } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
 import { ThemeProvider, CircularProgress } from "@material-ui/core";
-import { useState } from "react";
-import { theme } from "../../helpers";
+import { useState, useEffect } from "react";
+import { theme, token } from "../../helpers";
+import { usersRequest } from "../../Request/Request";
 
-const UsersList = ({ list }) => {
-  console.log(list);
+const UsersList = () => {
   const [input, setInput] = useState("");
 
   const handleInput = (e) => {
     setInput(e.target.value.toLowerCase());
   };
+
+  const [list, setList] = useState([]);
+
+  const requestUsers = async () => {
+    const path = `/users`;
+    setList(await usersRequest(token(), path));
+  };
+
+  useEffect(() => {
+    requestUsers();
+  }, []);
 
   return (
     <>
