@@ -1,13 +1,24 @@
 @media screen and (max-width: 800px) {
   .container {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     display: flex;
-    flex-wrap: wrap;
-    padding-top: 10vh;
+    flex-direction: column;
+    position: relative;
+    bottom: 8vh;
+  }
+  .matheusDiv {
+    width: 80vw;
+    border-radius: 20px;
+    height: 42vh;
   }
   .ivanDiv {
-    float: left;
+    width: 80vw;
+    border-radius: 20px;
+    height: 42vh;
+  }
+  .kenziemade {
+    display: none;
   }
 }
 

@@ -71,7 +71,6 @@ const FormFeedbacks = () => {
         <Alert severity={alert.result}>{alert.message}</Alert>
       ) : (
         <>
-          <h2>Novo Feedback</h2>
           <FormContainer activate height={50}>
             <StyledPaper mobile height={45}>
               <form onSubmit={handleSubmit(handleFeedback)}>
