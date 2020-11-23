@@ -35,7 +35,7 @@ const Routers = () => {
             <Route path="/feedbacks/:id">
               <FeedbacksList />
             </Route>
-            <Route exact path="/feedback-form">
+            <Route exact path="/feedback-form/:id">
               <FormFeedbacks />
             </Route>
             <Route exact path="/contact">

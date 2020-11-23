@@ -49,10 +49,6 @@ export const AuthenticatedData = [
     url: "/feedbacks",
   },
   {
-    label: "Novo Feedback",
-    url: "/feedback-form",
-  },
-  {
     label: "Contato",
     url: "/contact",
   },
