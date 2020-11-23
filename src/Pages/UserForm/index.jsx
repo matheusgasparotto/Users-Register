@@ -46,6 +46,7 @@ const UserForm = () => {
           elevation={3}
           square={true}
           className="cardLogin"
+          style={{ paddingTop: "10px" }}
         >
           <form onSubmit={handleSubmit(handleForm)} className="form">
             {FormData.map((input, index) => {
@@ -73,7 +74,12 @@ const UserForm = () => {
                 errors.password_confirmation?.message}
             </p>
             <ButtonsContainer>
-              <StyledButton variant="contained" type="submit" color="primary">
+              <StyledButton
+                variant="contained"
+                type="submit"
+                color="primary"
+                style={{ marginBottom: "120px" }}
+              >
                 Enviar
               </StyledButton>
             </ButtonsContainer>

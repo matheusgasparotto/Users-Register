@@ -11,6 +11,7 @@ import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
 import { token } from "../helpers";
 import { useEffect, useState } from "react";
+import Contact from "../Pages/Contact";
 
 const Routers = () => {
   const [menu, setMenu] = useState("home");
@@ -37,7 +38,9 @@ const Routers = () => {
             <Route exact path="/feedback-form">
               <FormFeedbacks />
             </Route>
-            <Route exact path="/contact"></Route>
+            <Route exact path="/contact">
+              <Contact />
+            </Route>
           </>
         ) : (
           <>

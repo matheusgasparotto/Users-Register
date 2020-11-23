@@ -1,9 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Rating from "@material-ui/lab/Rating";
-import Typography from "@material-ui/core/Typography";
+import { Typography, Card, CardContent } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {

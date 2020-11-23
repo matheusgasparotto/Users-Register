@@ -1,12 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -55,7 +57,12 @@ const UserCard = ({ user }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={go_Feedbacks}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={go_Feedbacks}
+          style={{ marginLeft: "60px" }}
+        >
           Feedbacks
         </Button>
       </CardActions>
