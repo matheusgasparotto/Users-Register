@@ -31,6 +31,33 @@ export const StyledPaper = styled(Paper)`
   ${({ height }) => css`
     height: ${height}vh;
   `}
+
+  @media screen and (max-width: 800px) {
+    position: absolute;
+    opacity: 80%;
+    background-color: transparent;
+    width: 70vw;
+    bottom: 46vh;
+    right: 5vw;
+    z-index: 1;
+    border: none;
+    box-shadow: none;
+  }
+  ${({ signup }) =>
+    signup &&
+    css`
+      @media screen and (max-width: 800px) {
+        position: absolute;
+        bottom: -2vh;
+        left: 5vw;
+      }
+    `}
+
+  @media screen and (max-width: 1024px) {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
 `;
 
 export const StyledInputLabel = styled(InputLabel)`
@@ -43,7 +70,6 @@ export const StyledInput = styled(Input)`
 
 export const ButtonsContainer = styled.div`
   width: 100%;
-  margin: 10px;
   display: flex;
   justify-content: space-around;
   height: 30%;
@@ -55,6 +81,11 @@ export const StyledButton = styled(Button)`
     height: ${height}vh;
     width: ${width}vw;
   `}
+
+  @media screen and (max-width: 800px) {
+    height: 4vh;
+    width: 20vw;
+  }
 `;
 
 export const IconContainer = styled.div`
@@ -71,6 +102,23 @@ export const IconContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  @media screen and (max-width: 800px) {
+    width: 85%;
+    height: 85vh;
+    position: relative;
+    top: 20vh;
+    z-index: 0;
+  }
+  ${({ signup }) =>
+    signup &&
+    css`
+      @media screen and (max-width: 800px) {
+        top: -30vh;
+        left: 5vw;
+        width: 80%;
+      }
+    `}
 `;
 
 export const Container = styled.div`
@@ -81,4 +129,23 @@ export const Container = styled.div`
   justify-content: space-around;
   margin-top: 30px;
   margin-left: 175px;
+
+  @media screen and (max-width: 800px) {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 0;
+  }
+`;
+
+export const HeadContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80vw;
+  margin-left: 15vw;
+  @media screen and (max-width: 800px) {
+    margin-left: 10vw;
+    flex-direction: column;
+    align-items: center;
+  }
 `;

@@ -42,11 +42,12 @@ const UserForm = () => {
     <FormContainer height={90} activate={activate}>
       <ThemeProvider theme={theme}>
         <StyledPaper
-          height={73}
+          height={70}
           elevation={3}
           square={true}
           className="cardLogin"
           style={{ paddingTop: "10px" }}
+          signup
         >
           <form onSubmit={handleSubmit(handleForm)} className="form">
             {FormData.map((input, index) => {
@@ -86,7 +87,7 @@ const UserForm = () => {
           </form>
         </StyledPaper>
       </ThemeProvider>
-      <IconContainer>
+      <IconContainer signup>
         <SignupIcon />
       </IconContainer>
     </FormContainer>

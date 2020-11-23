@@ -73,6 +73,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
+    [theme.breakpoints.down("sm")]: {
+      opacity: "0",
+    },
   },
   toolbar: {
     display: "flex",
