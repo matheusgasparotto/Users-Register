@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import { ButtonsContainer } from "../../globalStyles";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,10 @@ const UserCard = ({ user }) => {
 
   const go_Feedbacks = () => {
     history.push(`/feedbacks/${id}`);
+  };
+
+  const go_newFeedback = () => {
+    history.push(`/feedback-form/${id}`);
   };
 
   return (
@@ -57,14 +62,24 @@ const UserCard = ({ user }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={go_Feedbacks}
-          style={{ marginLeft: "60px" }}
-        >
-          Feedbacks
-        </Button>
+        <ButtonsContainer>
+          <Button
+            size="small"
+            color="primary"
+            onClick={go_Feedbacks}
+            style={{ marginLeft: "10px" }}
+          >
+            Feedbacks
+          </Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={go_newFeedback}
+            style={{ marginLeft: "10px" }}
+          >
+            Novo Feedback
+          </Button>
+        </ButtonsContainer>
       </CardActions>
     </Card>
   );

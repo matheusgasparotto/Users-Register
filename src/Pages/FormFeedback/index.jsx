@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FeedbackData, theme } from "../../helpers";
 import { sendFeedback } from "../../Request/Request";
-import { user_id, token } from "../../helpers";
+import { token } from "../../helpers";
 import Rating from "@material-ui/lab/Rating";
 import { Alert } from "@material-ui/lab";
 import { ThemeProvider } from "@material-ui/core";
@@ -14,6 +14,7 @@ import {
   ButtonsContainer,
   StyledButton,
 } from "../../globalStyles";
+import { useParams } from "react-router-dom";
 
 const FormFeedbacks = () => {
   const { register, handleSubmit, unregister } = useForm();
@@ -34,6 +35,8 @@ const FormFeedbacks = () => {
     setTimeout(() => setResponse(false), 4000);
   };
 
+  const Params = useParams();
+
   const handleFeedback = async (body) => {
     const data = { feedback: { ...body, grade: grade } };
     let result;
@@ -41,7 +44,7 @@ const FormFeedbacks = () => {
       result = await sendFeedback({
         token: token(),
         data: data,
-        user_id: user_id(),
+        user_id: Params.id,
       });
       feedbackResponse(result, "success", '"Feedback cadastrado com sucesso"');
     } catch (error) {
