@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -17,8 +17,6 @@ const Routers = () => {
 
   useEffect(() => {
     token() !== null && setMenu("authenticated");
-    console.log(menu);
-    console.log(token());
   }, []);
 
   return (
