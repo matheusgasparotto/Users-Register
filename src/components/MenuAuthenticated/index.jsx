@@ -7,18 +7,20 @@ import {
   Toolbar,
   List,
   CssBaseline,
-  Typography,
   Divider,
   IconButton,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
+import PeopleIcon from "@material-ui/icons/People";
 import MenuIcon from "@material-ui/icons/Menu";
+import CommentIcon from "@material-ui/icons/Comment";
+import SubdirectoryArrowLeftIcon from "@material-ui/icons/SubdirectoryArrowLeft";
+import ContactMailIcon from "@material-ui/icons/ContactMail";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import FolderOpenIcon from "@material-ui/icons/FolderOpen";
 import { AuthenticatedData } from "../../helpers";
 import { useHistory } from "react-router-dom";
 
@@ -132,9 +134,6 @@ const MenuAuthenticated = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Feedack Culture
-            </Typography>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -174,7 +173,17 @@ const MenuAuthenticated = () => {
                 }}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {text.label === "Usuários" ? (
+                    <PeopleIcon />
+                  ) : text.label === "Meus Feedbacks" ? (
+                    <FolderOpenIcon />
+                  ) : text.label === "Novo Feedback" ? (
+                    <CommentIcon />
+                  ) : text.label === "Contato" ? (
+                    <ContactMailIcon />
+                  ) : (
+                    <SubdirectoryArrowLeftIcon />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={text.label} />
               </ListItem>
