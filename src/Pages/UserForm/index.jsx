@@ -14,6 +14,7 @@ import {
   StyledButton,
   ButtonsContainer,
   IconContainer,
+  StyledErrors,
 } from "../../globalStyles";
 import { SignupIcon } from "../../components/Icons";
 
@@ -42,11 +43,12 @@ const UserForm = () => {
     <FormContainer height={90} activate={activate}>
       <ThemeProvider theme={theme}>
         <StyledPaper
-          height={73}
+          height={70}
           elevation={3}
           square={true}
           className="cardLogin"
           style={{ paddingTop: "10px" }}
+          signup
         >
           <form onSubmit={handleSubmit(handleForm)} className="form">
             {FormData.map((input, index) => {
@@ -66,13 +68,13 @@ const UserForm = () => {
                 </div>
               );
             })}
-            <p className="errors">
+            <StyledErrors>
               {errors.user?.message ||
                 errors.name?.message ||
                 errors.email?.message ||
                 errors.password?.message ||
                 errors.password_confirmation?.message}
-            </p>
+            </StyledErrors>
             <ButtonsContainer>
               <StyledButton
                 variant="contained"
@@ -86,7 +88,7 @@ const UserForm = () => {
           </form>
         </StyledPaper>
       </ThemeProvider>
-      <IconContainer>
+      <IconContainer signup>
         <SignupIcon />
       </IconContainer>
     </FormContainer>

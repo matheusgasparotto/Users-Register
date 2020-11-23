@@ -1,6 +1,6 @@
 import UserTable from "../../components/UserTable";
 import UserCard from "../../components/UserCard";
-import { Container } from "../../globalStyles";
+import { Container, HeadContainer, SlideGuide } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
 import {
   ThemeProvider,
@@ -44,30 +44,36 @@ const UsersList = () => {
         <CircularProgress />
       ) : (
         <>
-          <div style={{ marginRight: "800px" }}>
-            <h4>Alternar exibição</h4>
+          <HeadContainer style={{ marginRight: "800px" }}>
             <div>
-              <FormControlLabel
-                control={<Switch onChange={handleLayout} />}
-                label={toggleCards ? "Cards" : "Table"}
-              />
+              <h4>Alternar exibição</h4>
+              <div>
+                <FormControlLabel
+                  control={<Switch onChange={handleLayout} />}
+                  label={toggleCards ? "Cards" : "Table"}
+                />
+              </div>
             </div>
-          </div>
-          <h2>Usuários cadastrados</h2>
-          <ThemeProvider theme={theme}>
-            <TextField
-              id="standard-search"
-              helperText="Buscar usuário"
-              type="search"
-              color="primary"
-              style={{ marginLeft: "760px" }}
-              onChange={handleInput}
-              value={input}
-            />
-          </ThemeProvider>
+            <h2>Usuários cadastrados</h2>
+            <ThemeProvider theme={theme}>
+              <TextField
+                id="standard-search"
+                helperText="Buscar usuário"
+                type="search"
+                color="primary"
+                onChange={handleInput}
+                value={input}
+              />
+            </ThemeProvider>
+          </HeadContainer>
+          {!toggleCards && (
+            <SlideGuide>
+              Arraste para o lado para mais informações {">>"}
+            </SlideGuide>
+          )}
           <Container>
             {!toggleCards ? (
-              <UserTable info={list} />
+              <UserTable info={list} input={input} />
             ) : input ? (
               list
                 .filter((user) => user.name?.toLowerCase().includes(input))

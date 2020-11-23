@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import FeedbackCard from "../../components/FeedbackCard";
-import { Container } from "../../globalStyles";
+import { Container, HeadContainer, SlideGuide } from "../../globalStyles";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../../Request/Request";
 import { token, user_id } from "../../helpers";
@@ -35,7 +35,7 @@ const FeedbacksList = () => {
 
   return (
     <>
-      <div style={{ marginRight: "800px" }}>
+      <HeadContainer>
         <h4>Alternar exibição</h4>
         <div>
           <FormControlLabel
@@ -43,7 +43,12 @@ const FeedbacksList = () => {
             label={toggleCards ? "Cards" : "Table"}
           />
         </div>
-      </div>
+      </HeadContainer>
+      {!toggleCards && (
+        <SlideGuide>
+          Arraste para o lado para mais informações {">>"}
+        </SlideGuide>
+      )}
       <Container>
         {!toggleCards ? (
           <FeedbackTable info={list} />

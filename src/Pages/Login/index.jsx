@@ -1,4 +1,3 @@
-import { Link } from "@material-ui/core";
 import { ThemeProvider, CircularProgress } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,6 +14,7 @@ import {
   StyledButton,
   ButtonsContainer,
   IconContainer,
+  StyledErrors,
 } from "../../globalStyles";
 
 const Login = ({ setMenu }) => {
@@ -64,7 +64,7 @@ const Login = ({ setMenu }) => {
           <CircularProgress />
         ) : (
           <StyledPaper
-            height={42}
+            height={40}
             elevation={3}
             square={true}
             style={{ paddingTop: "15px" }}
@@ -86,11 +86,11 @@ const Login = ({ setMenu }) => {
                   </div>
                 );
               })}
-              <p className="errors">
+              <StyledErrors>
                 {errors.user?.message ||
                   errors.password?.message ||
                   errorsServer?.message}
-              </p>
+              </StyledErrors>
               <ButtonsContainer>
                 <StyledButton
                   height={7}
@@ -101,7 +101,6 @@ const Login = ({ setMenu }) => {
                 >
                   entrar
                 </StyledButton>
-                <Link href="#">Esqueceu a senha?</Link>
               </ButtonsContainer>
             </form>
           </StyledPaper>

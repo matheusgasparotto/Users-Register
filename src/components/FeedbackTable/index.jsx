@@ -26,6 +26,9 @@ const StyledTableRow = withStyles((theme) => ({
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
+    [theme.breakpoints.down("800px")]: {
+      width: "90%",
+    },
   },
 }))(TableRow);
 

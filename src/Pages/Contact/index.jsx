@@ -3,17 +3,13 @@ import ivan from "../../img/ivan.png";
 import matheus from "../../img/matheus.png";
 import kenzie from "../../img/selokenzie.svg";
 import "./index.css";
+import { Paper } from "@material-ui/core";
 
 const Contact = () => {
   return (
-    <>
-      <div className="ivanDiv">
-        <StyledPaper
-          height={55}
-          elevation={5}
-          square={true}
-          style={{ padding: "10px" }}
-        >
+    <div className="container">
+      <div>
+        <Paper elevation={5} square={true} className="ivanDiv">
           <h3>Ivan Borba</h3>
           <img
             alt="Ivan"
@@ -26,15 +22,10 @@ const Contact = () => {
           <p style={{ marginTop: "7px", marginBottom: "7px" }}>
             E-mail: mrborbaivan@gmail.com
           </p>
-        </StyledPaper>
+        </Paper>
       </div>
-      <div className="matheusDiv">
-        <StyledPaper
-          height={55}
-          elevation={5}
-          square={true}
-          style={{ padding: "10px" }}
-        >
+      <div>
+        <Paper elevation={5} square={true} className="matheusDiv">
           <h3>Matheus Gasparotto Andrade</h3>
           <img
             alt="Matheus"
@@ -47,7 +38,7 @@ const Contact = () => {
           <p style={{ marginTop: "7px", marginBottom: "7px" }}>
             E-mail: matheus.gandrade2018@gmail.com
           </p>
-        </StyledPaper>
+        </Paper>
       </div>
       <img
         alt="kenziemade"
@@ -55,7 +46,7 @@ const Contact = () => {
         style={{ width: "150px" }}
         className="kenziemade"
       />
-    </>
+    </div>
   );
 };
 
