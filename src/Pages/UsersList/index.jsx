@@ -1,6 +1,6 @@
 import UserTable from "../../components/UserTable";
 import UserCard from "../../components/UserCard";
-import { Container, HeadContainer } from "../../globalStyles";
+import { Container, HeadContainer, SlideGuide } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
 import {
   ThemeProvider,
@@ -66,9 +66,14 @@ const UsersList = () => {
               />
             </ThemeProvider>
           </HeadContainer>
+          {!toggleCards && (
+            <SlideGuide>
+              Arraste para o lado para mais informações {">>"}
+            </SlideGuide>
+          )}
           <Container>
             {!toggleCards ? (
-              <UserTable info={list} />
+              <UserTable info={list} input={input} />
             ) : input ? (
               list
                 .filter((user) => user.name?.toLowerCase().includes(input))

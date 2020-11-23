@@ -73,7 +73,7 @@ const FormFeedbacks = () => {
         <>
           <h2>Novo Feedback</h2>
           <FormContainer activate height={50}>
-            <StyledPaper height={45} style={{ paddingTop: "10px" }}>
+            <StyledPaper mobile height={45}>
               <form onSubmit={handleSubmit(handleFeedback)}>
                 {FeedbackData.map((input, index) => {
                   const { name, label, type } = input;

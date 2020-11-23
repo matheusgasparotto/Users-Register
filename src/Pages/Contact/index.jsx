@@ -6,7 +6,7 @@ import "./index.css";
 
 const Contact = () => {
   return (
-    <>
+    <div className="container">
       <div className="ivanDiv">
         <StyledPaper
           height={55}
@@ -55,7 +55,7 @@ const Contact = () => {
         style={{ width: "150px" }}
         className="kenziemade"
       />
-    </>
+    </div>
   );
 };
 

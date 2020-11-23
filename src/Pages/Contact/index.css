@@ -1,55 +1,70 @@
-.ivanDiv {
-  text-align: center;
-  margin-left: 200px;
-  position: absolute;
-  transition: 2s;
-  animation: ivanMoveIn ease 2s;
-  -webkit-animation: ivanMoveIn ease 2s;
-}
-
-.matheusDiv {
-  text-align: center;
-  margin-left: 640px;
-  z-index: 1;
-  transition: 2s;
-  animation: matheusMoveIn ease 3s;
-  -webkit-animation: matheusMoveIn ease 3s;
-}
-
-.kenziemade {
-  margin-left: 1000px;
-  transition: 2s;
-  animation: fadeIn ease 8s;
-  -webkit-animation: fadeIn ease 8s;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
+@media screen and (max-width: 800px) {
+  .container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10vh;
   }
-  100% {
-    opacity: 1;
+  .ivanDiv {
+    float: left;
   }
 }
 
-@keyframes ivanMoveIn {
-  0% {
-    opacity: 0;
-    margin-left: -200px;
-  }
-  100% {
-    opacity: 1;
+@media screen and (min-width: 800px) {
+  .ivanDiv {
+    text-align: center;
     margin-left: 200px;
+    position: absolute;
+    transition: 2s;
+    animation: ivanMoveIn ease 2s;
+    -webkit-animation: ivanMoveIn ease 2s;
   }
-}
 
-@keyframes matheusMoveIn {
-  0% {
-    opacity: 0;
-    margin-left: 1500px;
-  }
-  100% {
-    opacity: 1;
+  .matheusDiv {
+    text-align: center;
     margin-left: 640px;
+    z-index: 1;
+    transition: 2s;
+    animation: matheusMoveIn ease 3s;
+    -webkit-animation: matheusMoveIn ease 3s;
+  }
+
+  .kenziemade {
+    margin-left: 1000px;
+    transition: 2s;
+    animation: fadeIn ease 8s;
+    -webkit-animation: fadeIn ease 8s;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ivanMoveIn {
+    0% {
+      opacity: 0;
+      margin-left: -200px;
+    }
+    100% {
+      opacity: 1;
+      margin-left: 200px;
+    }
+  }
+
+  @keyframes matheusMoveIn {
+    0% {
+      opacity: 0;
+      margin-left: 1500px;
+    }
+    100% {
+      opacity: 1;
+      margin-left: 640px;
+    }
   }
 }

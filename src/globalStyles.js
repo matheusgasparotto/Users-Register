@@ -32,6 +32,14 @@ export const StyledPaper = styled(Paper)`
     height: ${height}vh;
   `}
 
+  ${({ mobile }) =>
+    mobile &&
+    css`
+      @media screen and (max-width: 800px) {
+        margin-right: 30px;
+      }
+    `}
+
   @media screen and (max-width: 800px) {
     position: absolute;
     opacity: 80%;
@@ -148,4 +156,18 @@ export const HeadContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
+`;
+
+export const SlideGuide = styled.p`
+  display: none;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    font-weight: bold;
+  }
+`;
+
+export const StyledErrors = styled.p`
+  color: red;
+  font-size: x-small;
 `;

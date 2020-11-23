@@ -14,6 +14,7 @@ import {
   StyledButton,
   ButtonsContainer,
   IconContainer,
+  StyledErrors,
 } from "../../globalStyles";
 import { SignupIcon } from "../../components/Icons";
 
@@ -67,13 +68,13 @@ const UserForm = () => {
                 </div>
               );
             })}
-            <p className="errors">
+            <StyledErrors>
               {errors.user?.message ||
                 errors.name?.message ||
                 errors.email?.message ||
                 errors.password?.message ||
                 errors.password_confirmation?.message}
-            </p>
+            </StyledErrors>
             <ButtonsContainer>
               <StyledButton
                 variant="contained"

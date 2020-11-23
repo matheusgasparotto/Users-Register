@@ -14,6 +14,7 @@ import {
   StyledButton,
   ButtonsContainer,
   IconContainer,
+  StyledErrors,
 } from "../../globalStyles";
 
 const Login = ({ setMenu }) => {
@@ -85,11 +86,11 @@ const Login = ({ setMenu }) => {
                   </div>
                 );
               })}
-              <p className="errors">
+              <StyledErrors>
                 {errors.user?.message ||
                   errors.password?.message ||
                   errorsServer?.message}
-              </p>
+              </StyledErrors>
               <ButtonsContainer>
                 <StyledButton
                   height={7}
