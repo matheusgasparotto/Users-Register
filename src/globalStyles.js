@@ -42,12 +42,12 @@ export const StyledInput = styled(Input)`
 `;
 
 export const ButtonsContainer = styled.div`
+  width: 100%;
   margin: 10px;
   display: flex;
   justify-content: space-around;
   height: 30%;
   align-items: center;
-  padding: 10px;
 `;
 
 export const StyledButton = styled(Button)`
