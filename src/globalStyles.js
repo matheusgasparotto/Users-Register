@@ -73,7 +73,7 @@ export const IconContainer = styled.div`
   }
 `;
 
-export const CardsContainer = styled.div`
+export const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   display: flex;

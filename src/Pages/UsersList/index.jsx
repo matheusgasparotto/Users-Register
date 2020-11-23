@@ -1,7 +1,13 @@
+import UserTable from "../../components/UserTable";
 import UserCard from "../../components/UserCard";
-import { CardsContainer } from "../../globalStyles";
+import { Container } from "../../globalStyles";
 import TextField from "@material-ui/core/TextField";
-import { ThemeProvider, CircularProgress } from "@material-ui/core";
+import {
+  ThemeProvider,
+  CircularProgress,
+  Switch,
+  FormControlLabel,
+} from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { theme, token } from "../../helpers";
 import { usersRequest } from "../../Request/Request";
@@ -9,6 +15,7 @@ import { usersRequest } from "../../Request/Request";
 const UsersList = () => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
+  const [toggleCards, setToggleCards] = useState(false);
 
   const handleInput = (e) => {
     setInput(e.target.value.toLowerCase());
@@ -22,6 +29,10 @@ const UsersList = () => {
     setLoading(false);
   };
 
+  const handleLayout = () => {
+    setToggleCards(!toggleCards);
+  };
+
   useEffect(() => {
     setLoading(true);
     requestUsers();
@@ -33,6 +44,15 @@ const UsersList = () => {
         <CircularProgress />
       ) : (
         <>
+          <div style={{ marginRight: "800px" }}>
+            <h4>Alternar exibição</h4>
+            <div>
+              <FormControlLabel
+                control={<Switch onChange={handleLayout} />}
+                label={toggleCards ? "Cards" : "Table"}
+              />
+            </div>
+          </div>
           <h2>Usuários cadastrados</h2>
           <ThemeProvider theme={theme}>
             <TextField
@@ -40,18 +60,22 @@ const UsersList = () => {
               helperText="Buscar usuário"
               type="search"
               color="primary"
-              style={{ marginLeft: "700px" }}
+              style={{ marginLeft: "760px" }}
               onChange={handleInput}
               value={input}
             />
           </ThemeProvider>
-          <CardsContainer>
-            {input
-              ? list
-                  .filter((user) => user.name?.toLowerCase().includes(input))
-                  .map((user, index) => <UserCard key={index} user={user} />)
-              : list.map((user, index) => <UserCard key={index} user={user} />)}
-          </CardsContainer>
+          <Container>
+            {!toggleCards ? (
+              <UserTable info={list} />
+            ) : input ? (
+              list
+                .filter((user) => user.name?.toLowerCase().includes(input))
+                .map((user, index) => <UserCard key={index} user={user} />)
+            ) : (
+              list.map((user, index) => <UserCard key={index} user={user} />)
+            )}
+          </Container>
         </>
       )}
     </>

@@ -14,13 +14,15 @@ import {
   ButtonsContainer,
   StyledButton,
 } from "../../globalStyles";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const FormFeedbacks = () => {
   const { register, handleSubmit, unregister } = useForm();
 
   const [alert, setAlert] = useState();
   const [response, setResponse] = useState();
+
+  const history = useHistory();
 
   const feedbackResponse = (result, alert, message) => {
     unregister("name");
@@ -35,6 +37,10 @@ const FormFeedbacks = () => {
     setTimeout(() => setResponse(false), 4000);
   };
 
+  const feedbackRedirect = (id) => {
+    history.push(`/feedbacks/${id}`);
+  };
+
   const Params = useParams();
 
   const handleFeedback = async (body) => {
@@ -47,6 +53,7 @@ const FormFeedbacks = () => {
         user_id: Params.id,
       });
       feedbackResponse(result, "success", '"Feedback cadastrado com sucesso"');
+      setTimeout(() => feedbackRedirect(Params.id), 2000);
     } catch (error) {
       feedbackResponse(
         result,
