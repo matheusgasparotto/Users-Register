@@ -4,7 +4,7 @@ import { CardsContainer } from "../../globalStyles";
 import { useState, useEffect } from "react";
 import { usersRequest } from "../../Request/Request";
 import { token, user_id } from "../../helpers";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const FeedbacksList = () => {
   const [list, setList] = useState([]);

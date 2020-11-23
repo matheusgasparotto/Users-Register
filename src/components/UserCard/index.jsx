@@ -35,7 +35,7 @@ const UserCard = ({ user }) => {
           component="img"
           alt={name}
           height="140"
-          image={
+          src={
             image_url
               ? image_url
               : "https://image.freepik.com/fotos-gratis/closeup-de-pato-borracha_53876-32073.jpg"

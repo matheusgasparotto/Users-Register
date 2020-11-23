@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -9,32 +9,24 @@ import FormFeedbacks from "../Pages/FormFeedback";
 import { HomeIcon } from "../components/Icons";
 import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
-import { useState, useEffect } from "react";
-import { usersRequest } from "../Request/Request";
+import { token } from "../helpers";
+import { useEffect, useState } from "react";
 
 const Routers = () => {
-  const token = window.localStorage.getItem("auth_token");
+  const [menu, setMenu] = useState("home");
 
-  const [list, setList] = useState([]);
-
-  const requestUsers = async () => {
-    const path = `/users`;
-    setList(await usersRequest(token, path));
-  };
-
-  const location = useLocation();
   useEffect(() => {
-    token && requestUsers();
-  }, [location]);
+    token() !== null && setMenu("authenticated");
+  }, []);
 
   return (
     <>
-      {token ? <MenuAuthenticated /> : <MenuHome />}
+      {menu === "authenticated" ? <MenuAuthenticated /> : <MenuHome />}
       <Switch>
-        {token ? (
+        {token() ? (
           <>
             <Route exact path="/users">
-              <UsersList list={list} />
+              <UsersList />
             </Route>
             <Route exact path="/feedbacks">
               <FeedbacksList />
@@ -55,7 +47,7 @@ const Routers = () => {
               </IconContainer>
             </Route>
             <Route exact path="/login">
-              <Login />
+              <Login setMenu={setMenu} />
             </Route>
             <Route exact path="/signup">
               <SignUp />
