@@ -33,6 +33,7 @@ const UsersList = () => {
         <CircularProgress />
       ) : (
         <>
+          <h2>Usuários cadastrados</h2>
           <ThemeProvider theme={theme}>
             <TextField
               id="standard-search"

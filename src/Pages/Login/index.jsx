@@ -63,7 +63,12 @@ const Login = ({ setMenu }) => {
         {loading ? (
           <CircularProgress />
         ) : (
-          <StyledPaper height={40} elevation={3} square={true}>
+          <StyledPaper
+            height={42}
+            elevation={3}
+            square={true}
+            style={{ paddingTop: "15px" }}
+          >
             <form onSubmit={handleSubmit(handleLogin)}>
               {LoginData.map((input, index) => {
                 const { name, type, label } = input;

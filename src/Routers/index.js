@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import SignUp from "../Pages/UserForm";
 import Login from "../Pages/Login";
 import MenuHome from "../components/MenuHome";
@@ -11,14 +11,13 @@ import { IconContainer } from "../globalStyles";
 import FeedbacksList from "../Pages/FeedbacksList";
 import { token } from "../helpers";
 import { useEffect, useState } from "react";
+import Contact from "../Pages/Contact";
 
 const Routers = () => {
   const [menu, setMenu] = useState("home");
 
   useEffect(() => {
     token() !== null && setMenu("authenticated");
-    console.log(menu);
-    console.log(token());
   }, []);
 
   return (
@@ -39,7 +38,9 @@ const Routers = () => {
             <Route exact path="/feedback-form">
               <FormFeedbacks />
             </Route>
-            <Route exact path="/contact"></Route>
+            <Route exact path="/contact">
+              <Contact />
+            </Route>
           </>
         ) : (
           <>

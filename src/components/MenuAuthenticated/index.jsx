@@ -1,22 +1,26 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  CssBaseline,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from "@material-ui/core";
+import PeopleIcon from "@material-ui/icons/People";
 import MenuIcon from "@material-ui/icons/Menu";
+import CommentIcon from "@material-ui/icons/Comment";
+import SubdirectoryArrowLeftIcon from "@material-ui/icons/SubdirectoryArrowLeft";
+import ContactMailIcon from "@material-ui/icons/ContactMail";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import FolderOpenIcon from "@material-ui/icons/FolderOpen";
 import { AuthenticatedData } from "../../helpers";
 import { useHistory } from "react-router-dom";
 
@@ -102,6 +106,12 @@ const MenuAuthenticated = () => {
     }
   };
 
+  const handleLogOut = (text) => {
+    localStorage.clear();
+    history.push(text.url);
+    document.location.reload();
+  };
+
   return (
     <>
       <div className={classes.root}>
@@ -124,9 +134,6 @@ const MenuAuthenticated = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Feedack Culture
-            </Typography>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -158,11 +165,25 @@ const MenuAuthenticated = () => {
                 button
                 key={text}
                 onClick={() => {
-                  open ? handleDrawerRedirect(text) : history.push(text.url);
+                  if (text.label === "Sair") {
+                    handleLogOut(text);
+                  } else {
+                    open ? handleDrawerRedirect(text) : history.push(text.url);
+                  }
                 }}
               >
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {text.label === "Usuários" ? (
+                    <PeopleIcon />
+                  ) : text.label === "Meus Feedbacks" ? (
+                    <FolderOpenIcon />
+                  ) : text.label === "Novo Feedback" ? (
+                    <CommentIcon />
+                  ) : text.label === "Contato" ? (
+                    <ContactMailIcon />
+                  ) : (
+                    <SubdirectoryArrowLeftIcon />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={text.label} />
               </ListItem>
