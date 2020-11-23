@@ -36,7 +36,7 @@ const FeedbackCard = ({ feedback }) => {
         <Typography component="legend">Nota</Typography>
         <Rating
           name="grade"
-          value={feedback.grade}
+          value={feedback.grade / 2}
           precision={0.5}
           max={5}
           onClick={null}
