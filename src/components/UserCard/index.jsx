@@ -55,7 +55,12 @@ const UserCard = ({ user }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={go_Feedbacks}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={go_Feedbacks}
+          style={{ marginLeft: "60px" }}
+        >
           Feedbacks
         </Button>
       </CardActions>

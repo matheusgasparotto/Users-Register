@@ -102,6 +102,12 @@ const MenuAuthenticated = () => {
     }
   };
 
+  const handleLogOut = (text) => {
+    localStorage.clear();
+    history.push(text.url);
+    document.location.reload();
+  };
+
   return (
     <>
       <div className={classes.root}>
@@ -158,7 +164,11 @@ const MenuAuthenticated = () => {
                 button
                 key={text}
                 onClick={() => {
-                  open ? handleDrawerRedirect(text) : history.push(text.url);
+                  if (text.label === "Sair") {
+                    handleLogOut(text);
+                  } else {
+                    open ? handleDrawerRedirect(text) : history.push(text.url);
+                  }
                 }}
               >
                 <ListItemIcon>

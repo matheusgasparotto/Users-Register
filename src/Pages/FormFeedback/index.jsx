@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FeedbackData } from "../../helpers";
+import { FeedbackData, theme } from "../../helpers";
 import { sendFeedback } from "../../Request/Request";
 import { user_id, token } from "../../helpers";
 import Rating from "@material-ui/lab/Rating";
 import { Alert } from "@material-ui/lab";
+import { ThemeProvider } from "@material-ui/core";
 import {
   StyledPaper,
   FormContainer,
@@ -59,50 +60,57 @@ const FormFeedbacks = () => {
       {response ? (
         <Alert severity={alert.result}>{alert.message}</Alert>
       ) : (
-        <FormContainer activate height={50}>
-          <StyledPaper height={45}>
-            <form onSubmit={handleSubmit(handleFeedback)}>
-              {FeedbackData.map((input, index) => {
-                const { name, label, type } = input;
-                return (
-                  <div key={index}>
-                    <StyledInputLabel className="inputsLabel" htmlFor={name}>
-                      {label}
-                    </StyledInputLabel>
-                    <StyledInput
-                      name={name}
-                      inputRef={register}
-                      type={type}
-                      id={name}
-                    />
-                  </div>
-                );
-              })}
-              <StyledInputLabel className="inputsLabel" htmlFor="grade">
-                Nota
-              </StyledInputLabel>
-              <Rating
-                id="grade"
-                precision={0.5}
-                onChange={(e) => {
-                  setGrade(e.target.value * 2);
-                }}
-                name="grade"
-                max={5}
-              />
-              <ButtonsContainer>
-                <StyledButton
-                  variant="contained"
-                  type="submit"
-                  color="primary"
-                  className="requestButton"
-                >
-                  Enviar
-                </StyledButton>
-              </ButtonsContainer>
-            </form>
-          </StyledPaper>
-        </FormContainer>
+        <>
+          <h2>Novo Feedback</h2>
+          <FormContainer activate height={50}>
+            <StyledPaper height={45} style={{ paddingTop: "10px" }}>
+              <form onSubmit={handleSubmit(handleFeedback)}>
+                {FeedbackData.map((input, index) => {
+                  const { name, label, type } = input;
+                  return (
+                    <div key={index}>
+                      <StyledInputLabel className="inputsLabel" htmlFor={name}>
+                        {label}
+                      </StyledInputLabel>
+                      <StyledInput
+                        name={name}
+                        inputRef={register}
+                        type={type}
+                        id={name}
+                      />
+                    </div>
+                  );
+                })}
+                <StyledInputLabel className="inputsLabel" htmlFor="grade">
+                  Nota
+                </StyledInputLabel>
+                <Rating
+                  id="grade"
+                  precision={0.5}
+                  onChange={(e) => {
+                    setGrade(e.target.value * 2);
+                  }}
+                  name="grade"
+                  max={5}
+                  style={{ marginTop: "10px" }}
+                />
+                <ButtonsContainer>
+                  <ThemeProvider theme={theme}>
+                    <StyledButton
+                      variant="contained"
+                      type="submit"
+                      color="primary"
+                      className="requestButton"
+                      style={{ marginBottom: "50px" }}
+                    >
+                      Enviar
+                    </StyledButton>
+                  </ThemeProvider>
+                </ButtonsContainer>
+              </form>
+            </StyledPaper>
+          </FormContainer>
+        </>
       )}
     </>
   );

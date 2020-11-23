@@ -45,7 +45,7 @@ export const AuthenticatedData = [
     url: "/users",
   },
   {
-    label: "Feedbacks",
+    label: "Meus Feedbacks",
     url: "/feedbacks",
   },
   {
@@ -57,7 +57,7 @@ export const AuthenticatedData = [
     url: "/contact",
   },
   {
-    label: "Log out",
+    label: "Sair",
     url: "/",
   },
 ];
