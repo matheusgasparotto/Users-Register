@@ -1,20 +1,20 @@
-Users Register.
+# Users Register.
 This project was created with study purposes.
 
-Developers and repository:
+# Developers and repository:
 I've developed this project together with my colleague at Kenzie Academy Brasil called Ivan Borba.
 
 Ivan Borba's GitHub > https://github.com/IvanBorba
 
 We used some React.js libraries such as React-router-dom, React-form-hook, Styled-components and Material-UI Components.
 
-Users API:
+# Users API:
 At this project our educacional instituition provided us an API designed to handle users and feedbacks registers, we choose axios library to do our HTTP requisitions.
 
-Original repository:
+# Original repository:
 The original repository and it's commits are available at https://gitlab.com/matheusgandrade/cadastro-de-usuario
 
-Instructions:
+# Instructions:
 Do not use your personal password or any other sensitive informations, the API wasnt criptographed.
 
 Feel free to navigate and to give me any feedbacks.
